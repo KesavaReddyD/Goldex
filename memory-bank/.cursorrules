@@ -1,0 +1,124 @@
+# Goldex Project Intelligence
+
+## Project Patterns
+- NextJS App Router structure for all pages
+- Using ShadCN UI components
+- Prisma ORM for database access
+- Using Supabase for database hosting and authentication
+- Bun as package manager
+- Server actions for all data mutations
+- Server components by default, client components only when necessary
+- Route grouping for organization (auth), (protected-pages), (public-pages)
+- Route-specific components in _components folders
+- Icons centralized in components/icons/index.tsx
+- No mock data - always use real data patterns and Prisma types
+
+## Code Style
+- Clean, minimal code - fewer lines is better
+- TypeScript with strict type checking
+- Component props using interface with explicit typing
+- Async/await for all asynchronous operations
+- Try/catch blocks for error handling
+- Consistent error format: { data?: Result, error?: string }
+- Toast notifications for user-facing errors
+- Proper authentication checks in all server actions
+- One component per file
+- Named exports preferred over default exports
+- Destructuring for props and data objects
+- Tailwind for all styling, no CSS modules
+- Comments focus on "why" not "what"
+- Zod for all form validations
+
+## File Organization
+- App directory for all routes
+- Route groups for logical separation
+- _components folders for route-specific components
+- Shared components in src/components
+- Server actions in src/actions
+- Utility functions in src/utils
+- Custom hooks in src/hooks
+- Type definitions in src/types
+- Configuration files in project root
+- Database schema in prisma/schema.prisma
+- Public assets in public directory
+- Icons managed through components/icons/index.tsx
+
+## Naming Conventions
+- PascalCase for component files and React components
+- camelCase for utils, hooks, and variables
+- kebab-case for routes and URLs
+- UPPER_SNAKE_CASE for environment variables and constants
+- Descriptive, intention-revealing names
+- Prefix "use" for custom hooks
+- Suffix "Page" for page components
+- Suffix "Form" for form components
+- Suffix "Provider" for context providers
+- Suffix "Button" for button components
+
+## Implementation Paths
+- Authentication flow:
+  1. Supabase Auth setup in lib/supabase.ts
+  2. Sign-in/sign-up forms with React Hook Form + Zod
+  3. Protected routes with server-side checks
+
+- Form submission pattern:
+  1. React Hook Form for client-side validation
+  2. Submit via server action
+  3. Return { data, error } format
+  4. Show toast on error
+  5. Redirect or update UI on success
+
+- Data fetching pattern:
+  1. Use server components for initial data
+  2. Cache results when appropriate
+  3. Prefer loading UI with suspense
+
+- Error handling pattern:
+  1. Try/catch in server actions
+  2. Return error in standard format
+  3. Display with toast notifications
+  4. Log server errors
+
+- Component pattern:
+  1. TypeScript interface for props
+  2. Destructure props
+  3. Return JSX with Tailwind classes
+
+## Workflow Preferences
+- Mobile-first responsive design
+- Avoid large component hierarchies
+- Use TypeScript interfaces over types when possible
+- Prefer composition over inheritance
+- Keep components focused on single responsibility
+- Extract reusable logic to custom hooks
+- Use server components for data fetching
+- Use client components only for interactivity
+- Favor controlled components
+- State close to where it's used
+- Proper error boundaries around client components
+- Follow ShadCN UI patterns for components
+- Prioritize accessibility
+
+## Known Challenges
+- Managing LLM API costs
+- Ensuring AI recommendation quality
+- Balancing simplicity vs information depth
+- Real-time market data integration costs
+- Mobile responsive design for data-heavy screens
+- Subscription management complexity
+- Avoiding financial advice regulatory issues
+- Efficient data caching without stale content
+
+## Tool Usage
+- ShadCN UI components for consistent design
+- Prisma Studio for database management
+- Prisma Client for type-safe database access
+- Supabase for authentication and database
+- Zod for schema validation
+- React Hook Form for form management
+- Lucide icons through components/icons
+- Tailwind for styling
+- OpenAI API for recommendation generation
+- Vercel for deployment
+- Server Actions for data mutations
+- Toast for user notifications 
