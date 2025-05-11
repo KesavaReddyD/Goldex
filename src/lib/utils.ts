@@ -42,7 +42,7 @@ export function formatCurrency(
  * @param fn The function to debounce
  * @param delay The delay in milliseconds
  */
-export function debounce<T extends (...args: any[]) => any>(
+export function debounce<T extends (...args: unknown[]) => unknown>(
   fn: T,
   delay: number
 ): (...args: Parameters<T>) => void {

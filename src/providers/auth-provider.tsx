@@ -3,14 +3,14 @@
 import { createContext, useContext, useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { createClient } from '@/utils/supabase/client';
-import type { User, Session } from '@supabase/supabase-js';
+import type { User, Session, AuthError } from '@supabase/supabase-js';
 
 type AuthContextType = {
   user: User | null;
   session: Session | null;
   loading: boolean;
-  signIn: (email: string, password: string) => Promise<{ error: any }>;
-  signUp: (email: string, password: string) => Promise<{ error: any }>;
+  signIn: (email: string, password: string) => Promise<{ error: AuthError | null }>;
+  signUp: (email: string, password: string) => Promise<{ error: AuthError | null }>;
   signInWithGoogle: () => Promise<void>;
   signOut: () => Promise<void>;
 };
@@ -30,7 +30,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       setLoading(true);
 
       // Get session from Supabase
-      const { data: { session }, error } = await supabase.auth.getSession();
+      const { data: { session } } = await supabase.auth.getSession();
       
       if (session) {
         setSession(session);
@@ -69,7 +69,8 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       
       return { error };
     } catch (error) {
-      return { error };
+      console.error('Sign in error:', error);
+      return { error: null };
     }
   };
 
@@ -83,7 +84,8 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       
       return { error };
     } catch (error) {
-      return { error };
+      console.error('Sign up error:', error);
+      return { error: null };
     }
   };
 
