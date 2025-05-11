@@ -57,7 +57,7 @@ const recentPredictions = [
 ];
 
 export function PredictionHistory() {
-  const { total, correct, incorrect, neutral, accuracy } = predictionStats;
+  const { correct, incorrect, neutral, accuracy } = predictionStats;
   
   return (
     <div className="space-y-4">

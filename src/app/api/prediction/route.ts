@@ -243,7 +243,7 @@ async function getMacroeconomicData(): Promise<MacroEconomic> {
  */
 async function fetchNewsSentiment(): Promise<NewsSentiment> {
   try {
-    // Call our internal news-impact API
+    // Call our internal newsImpact API
     const response = await fetch('/api/newsImpact', {
       method: 'GET',
       headers: {
@@ -527,10 +527,10 @@ function extractJsonFromText(text: string): string {
  */
 export async function GET() {
   try {
-    console.log('Generating gold price prediction...');
+    //console.log('Generating gold price prediction...');
     
     // Step 1: Fetch gold price data
-    console.log('Fetching historical gold price data...');
+    //console.log('Fetching historical gold price data...');
     const goldData = await fetchGoldPriceData(30);
     
     if (goldData.length === 0) {

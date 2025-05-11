@@ -5,7 +5,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { PredictionCard } from "./_components/prediction-card";
 // import { GoldChart } from "./_components/gold-chart";
 import { NewsSummaries } from "./_components/news-summaries";
-import { PredictionHistory } from "./_components/prediction-history";
+// import { PredictionHistory } from "./_components/prediction-history";
 import TradingViewWidget from "./_components/Tradingview";
 
 export default function DashboardPage() {

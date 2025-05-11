@@ -1,4 +1,4 @@
-// src/pages/api/news-impact.ts
+// src/pages/api/newsImpact.ts
 import { NextResponse } from 'next/server';
 import { GoogleGenerativeAI, HarmCategory, HarmBlockThreshold } from '@google/generative-ai';
 
@@ -46,7 +46,7 @@ async function fetchNews(): Promise<Article[]> {
       throw new Error('Invalid response from News API');
     }
     
-    console.log(`Found ${data.articles.length} articles from News API`);
+    //console.log(`Found ${data.articles.length} articles from News API`);
     return data.articles;
   } catch (error) {
     console.error('Error fetching news:', error);
@@ -125,7 +125,7 @@ Respond with EXACTLY this JSON schema:
   "reason": string
 }`;
 
-    console.log(`Analyzing article: ${article.title}`);
+    //console.log(`Analyzing article: ${article.title}`);
     
     // Send the message to the model
     const result = await chat.sendMessage(prompt);
@@ -181,7 +181,7 @@ function extractJsonFromText(text: string): string {
 
 export async function GET() {
   try {
-    console.log('Fetching news articles...');
+    //console.log('Fetching news articles...');
     
     // Check environment variables on startup
     if (!NEWSAPI_KEY) {
@@ -202,7 +202,7 @@ export async function GET() {
       return NextResponse.json({ error: 'No news articles found' }, { status: 404 });
     }
     
-    console.log(`Analyzing ${articles.length} articles...`);
+    //console.log(`Analyzing ${articles.length} articles...`);
     
     const analyses = await Promise.all(
       articles.map(async (article) => ({
@@ -219,10 +219,10 @@ export async function GET() {
       }))
     );
     
-    console.log('All articles analyzed successfully');
+    //console.log('All articles analyzed successfully');
     return NextResponse.json(analyses);
   } catch (error) {
-    console.error('Error in news-impact API route:', error);
+    console.error('Error in newsImpact API route:', error);
     return NextResponse.json(
       { error: 'Failed to process news impact' }, 
       { status: 500 }
