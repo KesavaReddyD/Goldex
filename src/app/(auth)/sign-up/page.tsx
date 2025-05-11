@@ -70,7 +70,7 @@ export default function SignUpPage() {
       });
 
       // Redirect to confirmation page
-      router.push('/sign-up/confirm');
+      router.push('/sign-in');
     } catch (error) {
       toast.error("Something went wrong", {
         description: 'An error occurred during sign up.'

@@ -1,133 +1,97 @@
-import { Metadata } from 'next';
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
-import {
-  Tabs,
-  TabsContent,
-  TabsList,
-  TabsTrigger,
-} from '@/components/ui/tabs';
-import { getCurrentUser } from '@/lib/auth';
-import { EmptyPlaceholder } from '../_components/empty-placeholder';
+'use client';
 
-export const metadata: Metadata = {
-  title: 'Dashboard - Goldex',
-  description: 'View your trading recommendations and market insights',
-};
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { PredictionCard } from "./_components/prediction-card";
+// import { GoldChart } from "./_components/gold-chart";
+import { NewsSummaries } from "./_components/news-summaries";
+import { PredictionHistory } from "./_components/prediction-history";
+import TradingViewWidget from "./_components/Tradingview";
 
-export default async function DashboardPage() {
-  const user = await getCurrentUser();
-
+export default function DashboardPage() {
   return (
-    <div className="flex flex-col space-y-6">
-      <div>
+    <div className="flex flex-col gap-4">
+      <div className="flex items-center justify-between">
         <h1 className="text-3xl font-bold tracking-tight">Dashboard</h1>
-        <p className="text-muted-foreground">
-          Welcome back{user?.email ? `, ${user.email.split('@')[0]}` : ''}! Here&apos;s your trading overview.
-        </p>
       </div>
-
-      <Tabs defaultValue="recommendations" className="w-full">
+      
+      <Tabs defaultValue="overview" className="space-y-4">
         <TabsList>
-          <TabsTrigger value="recommendations">Recommendations</TabsTrigger>
-          <TabsTrigger value="overview">Market Overview</TabsTrigger>
+          <TabsTrigger value="overview">Overview</TabsTrigger>
+          <TabsTrigger value="history">History</TabsTrigger>
+          <TabsTrigger value="alerts">Alerts</TabsTrigger>
         </TabsList>
-        <TabsContent value="recommendations" className="space-y-4 mt-4">
-          <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
-            <Card>
-              <CardHeader className="pb-2">
-                <CardTitle className="text-xl">Gold</CardTitle>
-                <CardDescription>Current recommendation</CardDescription>
-              </CardHeader>
-              <CardContent>
-                <EmptyPlaceholder
-                  title="No Recommendations Yet"
-                  description="Recommendations will appear here once the analysis engine is integrated."
-                />
-              </CardContent>
-              <CardFooter className="text-sm text-muted-foreground">
-                Updated: Not available
-              </CardFooter>
-            </Card>
+        
+        <TabsContent value="overview" className="space-y-6">
+          <div className="grid gap-4 md:grid-cols-1 lg:grid-cols-1">
+            {/* Prediction Card */}
+            <PredictionCard />
             
+            {/* Gold Chart */}
             <Card>
-              <CardHeader className="pb-2">
-                <CardTitle className="text-xl">EUR/USD</CardTitle>
-                <CardDescription>Current recommendation</CardDescription>
+              <CardHeader>
+                <CardTitle>Gold Price Chart</CardTitle>
+                <CardDescription>Real-time gold price movement</CardDescription>
               </CardHeader>
-              <CardContent>
-                <EmptyPlaceholder
-                  title="No Recommendations Yet"
-                  description="Recommendations will appear here once the analysis engine is integrated."
-                />
+              <CardContent className="pl-2 pb-2">
+                <div className="h-full w-full">
+                   <TradingViewWidget />
+                </div>
               </CardContent>
-              <CardFooter className="text-sm text-muted-foreground">
-                Updated: Not available
-              </CardFooter>
-            </Card>
-            
-            <Card>
-              <CardHeader className="pb-2">
-                <CardTitle className="text-xl">USD/JPY</CardTitle>
-                <CardDescription>Current recommendation</CardDescription>
-              </CardHeader>
-              <CardContent>
-                <EmptyPlaceholder
-                  title="No Recommendations Yet"
-                  description="Recommendations will appear here once the analysis engine is integrated."
-                />
-              </CardContent>
-              <CardFooter className="text-sm text-muted-foreground">
-                Updated: Not available
-              </CardFooter>
             </Card>
           </div>
+
+          <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-2 mt-4">
+            {/* News Summaries */}
+            <Card className="col-span-1">
+              <CardHeader>
+                <CardTitle>Market News</CardTitle>
+                <CardDescription>Latest news affecting gold prices</CardDescription>
+              </CardHeader>
+              <CardContent>
+                <NewsSummaries />
+              </CardContent>
+            </Card>
+            
+            {/* Prediction History */}
+            {/* <Card className="col-span-1">
+              <CardHeader>
+                <CardTitle>Prediction Performance</CardTitle>
+                <CardDescription>Accuracy of previous predictions</CardDescription>
+              </CardHeader>
+              <CardContent>
+                <PredictionHistory />
+              </CardContent>
+            </Card> */}
+          </div>
+          
+          
         </TabsContent>
         
-        <TabsContent value="overview" className="space-y-4 mt-4">
+        <TabsContent value="history">
           <Card>
             <CardHeader>
-              <CardTitle>Market Overview</CardTitle>
-              <CardDescription>
-                Global market trends and indicators
-              </CardDescription>
+              <CardTitle>Trading History</CardTitle>
+              <CardDescription>Your past trading insights</CardDescription>
             </CardHeader>
-            <CardContent className="h-[300px]">
-              <EmptyPlaceholder
-                title="Market Data Coming Soon"
-                description="Real-time market data will be displayed here."
-              />
+            <CardContent>
+              <p>Coming soon in the next phase.</p>
+            </CardContent>
+          </Card>
+        </TabsContent>
+        
+        <TabsContent value="alerts">
+          <Card>
+            <CardHeader>
+              <CardTitle>Price Alerts</CardTitle>
+              <CardDescription>Monitor price movements</CardDescription>
+            </CardHeader>
+            <CardContent>
+              <p>Coming soon in the next phase.</p>
             </CardContent>
           </Card>
         </TabsContent>
       </Tabs>
-
-      <div className="grid gap-4 md:grid-cols-2">
-        <Card>
-          <CardHeader>
-            <CardTitle>Your Alerts</CardTitle>
-            <CardDescription>Recent price and news alerts</CardDescription>
-          </CardHeader>
-          <CardContent>
-            <EmptyPlaceholder
-              title="No Alerts Set"
-              description="Set up alerts to get notified about price movements or market events."
-            />
-          </CardContent>
-        </Card>
-        
-        <Card>
-          <CardHeader>
-            <CardTitle>Performance History</CardTitle>
-            <CardDescription>Track recommendation accuracy</CardDescription>
-          </CardHeader>
-          <CardContent>
-            <EmptyPlaceholder
-              title="No Performance Data"
-              description="Performance metrics will appear once recommendations are generated."
-            />
-          </CardContent>
-        </Card>
-      </div>
     </div>
   );
 } 

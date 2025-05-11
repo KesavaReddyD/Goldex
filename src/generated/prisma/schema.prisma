@@ -10,8 +10,27 @@ generator client {
 }
 
 datasource db {
-  provider = "postgresql"
-  url      = env("DATABASE_URL")
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
+}
+
+// Historical Gold Price Data
+model GoldPrice {
+  id            String   @id @default(uuid())
+  date          DateTime @unique
+  openPrice     Float    @map("open_price")
+  highPrice     Float    @map("high_price")
+  lowPrice      Float    @map("low_price")
+  closePrice    Float    @map("close_price")
+  volume        Int?
+  changeAmount  Float?   @map("change_amount")
+  changePercent Float?   @map("change_percent")
+  createdAt     DateTime @default(now()) @map("created_at")
+  updatedAt     DateTime @updatedAt @map("updated_at")
+
+  @@index([date])
+  @@map("gold_prices")
 }
 
 // User model linked to Supabase Auth

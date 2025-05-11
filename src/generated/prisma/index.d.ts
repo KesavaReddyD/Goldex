@@ -14,6 +14,11 @@ export type PrismaPromise<T> = $Public.PrismaPromise<T>
 
 
 /**
+ * Model GoldPrice
+ * 
+ */
+export type GoldPrice = $Result.DefaultSelection<Prisma.$GoldPricePayload>
+/**
  * Model User
  * 
  */
@@ -46,8 +51,8 @@ export type Alert = $Result.DefaultSelection<Prisma.$AlertPayload>
  * @example
  * ```
  * const prisma = new PrismaClient()
- * // Fetch zero or more Users
- * const users = await prisma.user.findMany()
+ * // Fetch zero or more GoldPrices
+ * const goldPrices = await prisma.goldPrice.findMany()
  * ```
  *
  *
@@ -67,8 +72,8 @@ export class PrismaClient<
    * @example
    * ```
    * const prisma = new PrismaClient()
-   * // Fetch zero or more Users
-   * const users = await prisma.user.findMany()
+   * // Fetch zero or more GoldPrices
+   * const goldPrices = await prisma.goldPrice.findMany()
    * ```
    *
    *
@@ -165,6 +170,16 @@ export class PrismaClient<
   }>>
 
       /**
+   * `prisma.goldPrice`: Exposes CRUD operations for the **GoldPrice** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more GoldPrices
+    * const goldPrices = await prisma.goldPrice.findMany()
+    * ```
+    */
+  get goldPrice(): Prisma.GoldPriceDelegate<ExtArgs, ClientOptions>;
+
+  /**
    * `prisma.user`: Exposes CRUD operations for the **User** model.
     * Example usage:
     * ```ts
@@ -653,6 +668,7 @@ export namespace Prisma {
 
 
   export const ModelName: {
+    GoldPrice: 'GoldPrice',
     User: 'User',
     UserPreference: 'UserPreference',
     Subscription: 'Subscription',
@@ -676,10 +692,84 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "user" | "userPreference" | "subscription" | "recommendation" | "alert"
+      modelProps: "goldPrice" | "user" | "userPreference" | "subscription" | "recommendation" | "alert"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
+      GoldPrice: {
+        payload: Prisma.$GoldPricePayload<ExtArgs>
+        fields: Prisma.GoldPriceFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.GoldPriceFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$GoldPricePayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.GoldPriceFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$GoldPricePayload>
+          }
+          findFirst: {
+            args: Prisma.GoldPriceFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$GoldPricePayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.GoldPriceFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$GoldPricePayload>
+          }
+          findMany: {
+            args: Prisma.GoldPriceFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$GoldPricePayload>[]
+          }
+          create: {
+            args: Prisma.GoldPriceCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$GoldPricePayload>
+          }
+          createMany: {
+            args: Prisma.GoldPriceCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.GoldPriceCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$GoldPricePayload>[]
+          }
+          delete: {
+            args: Prisma.GoldPriceDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$GoldPricePayload>
+          }
+          update: {
+            args: Prisma.GoldPriceUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$GoldPricePayload>
+          }
+          deleteMany: {
+            args: Prisma.GoldPriceDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.GoldPriceUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.GoldPriceUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$GoldPricePayload>[]
+          }
+          upsert: {
+            args: Prisma.GoldPriceUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$GoldPricePayload>
+          }
+          aggregate: {
+            args: Prisma.GoldPriceAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateGoldPrice>
+          }
+          groupBy: {
+            args: Prisma.GoldPriceGroupByArgs<ExtArgs>
+            result: $Utils.Optional<GoldPriceGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.GoldPriceCountArgs<ExtArgs>
+            result: $Utils.Optional<GoldPriceCountAggregateOutputType> | number
+          }
+        }
+      }
       User: {
         payload: Prisma.$UserPayload<ExtArgs>
         fields: Prisma.UserFieldRefs
@@ -1134,6 +1224,7 @@ export namespace Prisma {
     omit?: Prisma.GlobalOmitConfig
   }
   export type GlobalOmitConfig = {
+    goldPrice?: GoldPriceOmit
     user?: UserOmit
     userPreference?: UserPreferenceOmit
     subscription?: SubscriptionOmit
@@ -1320,6 +1411,1137 @@ export namespace Prisma {
   /**
    * Models
    */
+
+  /**
+   * Model GoldPrice
+   */
+
+  export type AggregateGoldPrice = {
+    _count: GoldPriceCountAggregateOutputType | null
+    _avg: GoldPriceAvgAggregateOutputType | null
+    _sum: GoldPriceSumAggregateOutputType | null
+    _min: GoldPriceMinAggregateOutputType | null
+    _max: GoldPriceMaxAggregateOutputType | null
+  }
+
+  export type GoldPriceAvgAggregateOutputType = {
+    openPrice: number | null
+    highPrice: number | null
+    lowPrice: number | null
+    closePrice: number | null
+    volume: number | null
+    changeAmount: number | null
+    changePercent: number | null
+  }
+
+  export type GoldPriceSumAggregateOutputType = {
+    openPrice: number | null
+    highPrice: number | null
+    lowPrice: number | null
+    closePrice: number | null
+    volume: number | null
+    changeAmount: number | null
+    changePercent: number | null
+  }
+
+  export type GoldPriceMinAggregateOutputType = {
+    id: string | null
+    date: Date | null
+    openPrice: number | null
+    highPrice: number | null
+    lowPrice: number | null
+    closePrice: number | null
+    volume: number | null
+    changeAmount: number | null
+    changePercent: number | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type GoldPriceMaxAggregateOutputType = {
+    id: string | null
+    date: Date | null
+    openPrice: number | null
+    highPrice: number | null
+    lowPrice: number | null
+    closePrice: number | null
+    volume: number | null
+    changeAmount: number | null
+    changePercent: number | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type GoldPriceCountAggregateOutputType = {
+    id: number
+    date: number
+    openPrice: number
+    highPrice: number
+    lowPrice: number
+    closePrice: number
+    volume: number
+    changeAmount: number
+    changePercent: number
+    createdAt: number
+    updatedAt: number
+    _all: number
+  }
+
+
+  export type GoldPriceAvgAggregateInputType = {
+    openPrice?: true
+    highPrice?: true
+    lowPrice?: true
+    closePrice?: true
+    volume?: true
+    changeAmount?: true
+    changePercent?: true
+  }
+
+  export type GoldPriceSumAggregateInputType = {
+    openPrice?: true
+    highPrice?: true
+    lowPrice?: true
+    closePrice?: true
+    volume?: true
+    changeAmount?: true
+    changePercent?: true
+  }
+
+  export type GoldPriceMinAggregateInputType = {
+    id?: true
+    date?: true
+    openPrice?: true
+    highPrice?: true
+    lowPrice?: true
+    closePrice?: true
+    volume?: true
+    changeAmount?: true
+    changePercent?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type GoldPriceMaxAggregateInputType = {
+    id?: true
+    date?: true
+    openPrice?: true
+    highPrice?: true
+    lowPrice?: true
+    closePrice?: true
+    volume?: true
+    changeAmount?: true
+    changePercent?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type GoldPriceCountAggregateInputType = {
+    id?: true
+    date?: true
+    openPrice?: true
+    highPrice?: true
+    lowPrice?: true
+    closePrice?: true
+    volume?: true
+    changeAmount?: true
+    changePercent?: true
+    createdAt?: true
+    updatedAt?: true
+    _all?: true
+  }
+
+  export type GoldPriceAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which GoldPrice to aggregate.
+     */
+    where?: GoldPriceWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of GoldPrices to fetch.
+     */
+    orderBy?: GoldPriceOrderByWithRelationInput | GoldPriceOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: GoldPriceWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` GoldPrices from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` GoldPrices.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned GoldPrices
+    **/
+    _count?: true | GoldPriceCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: GoldPriceAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: GoldPriceSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: GoldPriceMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: GoldPriceMaxAggregateInputType
+  }
+
+  export type GetGoldPriceAggregateType<T extends GoldPriceAggregateArgs> = {
+        [P in keyof T & keyof AggregateGoldPrice]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateGoldPrice[P]>
+      : GetScalarType<T[P], AggregateGoldPrice[P]>
+  }
+
+
+
+
+  export type GoldPriceGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: GoldPriceWhereInput
+    orderBy?: GoldPriceOrderByWithAggregationInput | GoldPriceOrderByWithAggregationInput[]
+    by: GoldPriceScalarFieldEnum[] | GoldPriceScalarFieldEnum
+    having?: GoldPriceScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: GoldPriceCountAggregateInputType | true
+    _avg?: GoldPriceAvgAggregateInputType
+    _sum?: GoldPriceSumAggregateInputType
+    _min?: GoldPriceMinAggregateInputType
+    _max?: GoldPriceMaxAggregateInputType
+  }
+
+  export type GoldPriceGroupByOutputType = {
+    id: string
+    date: Date
+    openPrice: number
+    highPrice: number
+    lowPrice: number
+    closePrice: number
+    volume: number | null
+    changeAmount: number | null
+    changePercent: number | null
+    createdAt: Date
+    updatedAt: Date
+    _count: GoldPriceCountAggregateOutputType | null
+    _avg: GoldPriceAvgAggregateOutputType | null
+    _sum: GoldPriceSumAggregateOutputType | null
+    _min: GoldPriceMinAggregateOutputType | null
+    _max: GoldPriceMaxAggregateOutputType | null
+  }
+
+  type GetGoldPriceGroupByPayload<T extends GoldPriceGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<GoldPriceGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof GoldPriceGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], GoldPriceGroupByOutputType[P]>
+            : GetScalarType<T[P], GoldPriceGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type GoldPriceSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    date?: boolean
+    openPrice?: boolean
+    highPrice?: boolean
+    lowPrice?: boolean
+    closePrice?: boolean
+    volume?: boolean
+    changeAmount?: boolean
+    changePercent?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }, ExtArgs["result"]["goldPrice"]>
+
+  export type GoldPriceSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    date?: boolean
+    openPrice?: boolean
+    highPrice?: boolean
+    lowPrice?: boolean
+    closePrice?: boolean
+    volume?: boolean
+    changeAmount?: boolean
+    changePercent?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }, ExtArgs["result"]["goldPrice"]>
+
+  export type GoldPriceSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    date?: boolean
+    openPrice?: boolean
+    highPrice?: boolean
+    lowPrice?: boolean
+    closePrice?: boolean
+    volume?: boolean
+    changeAmount?: boolean
+    changePercent?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }, ExtArgs["result"]["goldPrice"]>
+
+  export type GoldPriceSelectScalar = {
+    id?: boolean
+    date?: boolean
+    openPrice?: boolean
+    highPrice?: boolean
+    lowPrice?: boolean
+    closePrice?: boolean
+    volume?: boolean
+    changeAmount?: boolean
+    changePercent?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }
+
+  export type GoldPriceOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "date" | "openPrice" | "highPrice" | "lowPrice" | "closePrice" | "volume" | "changeAmount" | "changePercent" | "createdAt" | "updatedAt", ExtArgs["result"]["goldPrice"]>
+
+  export type $GoldPricePayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "GoldPrice"
+    objects: {}
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      date: Date
+      openPrice: number
+      highPrice: number
+      lowPrice: number
+      closePrice: number
+      volume: number | null
+      changeAmount: number | null
+      changePercent: number | null
+      createdAt: Date
+      updatedAt: Date
+    }, ExtArgs["result"]["goldPrice"]>
+    composites: {}
+  }
+
+  type GoldPriceGetPayload<S extends boolean | null | undefined | GoldPriceDefaultArgs> = $Result.GetResult<Prisma.$GoldPricePayload, S>
+
+  type GoldPriceCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<GoldPriceFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: GoldPriceCountAggregateInputType | true
+    }
+
+  export interface GoldPriceDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['GoldPrice'], meta: { name: 'GoldPrice' } }
+    /**
+     * Find zero or one GoldPrice that matches the filter.
+     * @param {GoldPriceFindUniqueArgs} args - Arguments to find a GoldPrice
+     * @example
+     * // Get one GoldPrice
+     * const goldPrice = await prisma.goldPrice.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends GoldPriceFindUniqueArgs>(args: SelectSubset<T, GoldPriceFindUniqueArgs<ExtArgs>>): Prisma__GoldPriceClient<$Result.GetResult<Prisma.$GoldPricePayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one GoldPrice that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {GoldPriceFindUniqueOrThrowArgs} args - Arguments to find a GoldPrice
+     * @example
+     * // Get one GoldPrice
+     * const goldPrice = await prisma.goldPrice.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends GoldPriceFindUniqueOrThrowArgs>(args: SelectSubset<T, GoldPriceFindUniqueOrThrowArgs<ExtArgs>>): Prisma__GoldPriceClient<$Result.GetResult<Prisma.$GoldPricePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first GoldPrice that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {GoldPriceFindFirstArgs} args - Arguments to find a GoldPrice
+     * @example
+     * // Get one GoldPrice
+     * const goldPrice = await prisma.goldPrice.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends GoldPriceFindFirstArgs>(args?: SelectSubset<T, GoldPriceFindFirstArgs<ExtArgs>>): Prisma__GoldPriceClient<$Result.GetResult<Prisma.$GoldPricePayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first GoldPrice that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {GoldPriceFindFirstOrThrowArgs} args - Arguments to find a GoldPrice
+     * @example
+     * // Get one GoldPrice
+     * const goldPrice = await prisma.goldPrice.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends GoldPriceFindFirstOrThrowArgs>(args?: SelectSubset<T, GoldPriceFindFirstOrThrowArgs<ExtArgs>>): Prisma__GoldPriceClient<$Result.GetResult<Prisma.$GoldPricePayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more GoldPrices that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {GoldPriceFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all GoldPrices
+     * const goldPrices = await prisma.goldPrice.findMany()
+     * 
+     * // Get first 10 GoldPrices
+     * const goldPrices = await prisma.goldPrice.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const goldPriceWithIdOnly = await prisma.goldPrice.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends GoldPriceFindManyArgs>(args?: SelectSubset<T, GoldPriceFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$GoldPricePayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a GoldPrice.
+     * @param {GoldPriceCreateArgs} args - Arguments to create a GoldPrice.
+     * @example
+     * // Create one GoldPrice
+     * const GoldPrice = await prisma.goldPrice.create({
+     *   data: {
+     *     // ... data to create a GoldPrice
+     *   }
+     * })
+     * 
+     */
+    create<T extends GoldPriceCreateArgs>(args: SelectSubset<T, GoldPriceCreateArgs<ExtArgs>>): Prisma__GoldPriceClient<$Result.GetResult<Prisma.$GoldPricePayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many GoldPrices.
+     * @param {GoldPriceCreateManyArgs} args - Arguments to create many GoldPrices.
+     * @example
+     * // Create many GoldPrices
+     * const goldPrice = await prisma.goldPrice.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends GoldPriceCreateManyArgs>(args?: SelectSubset<T, GoldPriceCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many GoldPrices and returns the data saved in the database.
+     * @param {GoldPriceCreateManyAndReturnArgs} args - Arguments to create many GoldPrices.
+     * @example
+     * // Create many GoldPrices
+     * const goldPrice = await prisma.goldPrice.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many GoldPrices and only return the `id`
+     * const goldPriceWithIdOnly = await prisma.goldPrice.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends GoldPriceCreateManyAndReturnArgs>(args?: SelectSubset<T, GoldPriceCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$GoldPricePayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a GoldPrice.
+     * @param {GoldPriceDeleteArgs} args - Arguments to delete one GoldPrice.
+     * @example
+     * // Delete one GoldPrice
+     * const GoldPrice = await prisma.goldPrice.delete({
+     *   where: {
+     *     // ... filter to delete one GoldPrice
+     *   }
+     * })
+     * 
+     */
+    delete<T extends GoldPriceDeleteArgs>(args: SelectSubset<T, GoldPriceDeleteArgs<ExtArgs>>): Prisma__GoldPriceClient<$Result.GetResult<Prisma.$GoldPricePayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one GoldPrice.
+     * @param {GoldPriceUpdateArgs} args - Arguments to update one GoldPrice.
+     * @example
+     * // Update one GoldPrice
+     * const goldPrice = await prisma.goldPrice.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends GoldPriceUpdateArgs>(args: SelectSubset<T, GoldPriceUpdateArgs<ExtArgs>>): Prisma__GoldPriceClient<$Result.GetResult<Prisma.$GoldPricePayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more GoldPrices.
+     * @param {GoldPriceDeleteManyArgs} args - Arguments to filter GoldPrices to delete.
+     * @example
+     * // Delete a few GoldPrices
+     * const { count } = await prisma.goldPrice.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends GoldPriceDeleteManyArgs>(args?: SelectSubset<T, GoldPriceDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more GoldPrices.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {GoldPriceUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many GoldPrices
+     * const goldPrice = await prisma.goldPrice.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends GoldPriceUpdateManyArgs>(args: SelectSubset<T, GoldPriceUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more GoldPrices and returns the data updated in the database.
+     * @param {GoldPriceUpdateManyAndReturnArgs} args - Arguments to update many GoldPrices.
+     * @example
+     * // Update many GoldPrices
+     * const goldPrice = await prisma.goldPrice.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more GoldPrices and only return the `id`
+     * const goldPriceWithIdOnly = await prisma.goldPrice.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends GoldPriceUpdateManyAndReturnArgs>(args: SelectSubset<T, GoldPriceUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$GoldPricePayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one GoldPrice.
+     * @param {GoldPriceUpsertArgs} args - Arguments to update or create a GoldPrice.
+     * @example
+     * // Update or create a GoldPrice
+     * const goldPrice = await prisma.goldPrice.upsert({
+     *   create: {
+     *     // ... data to create a GoldPrice
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the GoldPrice we want to update
+     *   }
+     * })
+     */
+    upsert<T extends GoldPriceUpsertArgs>(args: SelectSubset<T, GoldPriceUpsertArgs<ExtArgs>>): Prisma__GoldPriceClient<$Result.GetResult<Prisma.$GoldPricePayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of GoldPrices.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {GoldPriceCountArgs} args - Arguments to filter GoldPrices to count.
+     * @example
+     * // Count the number of GoldPrices
+     * const count = await prisma.goldPrice.count({
+     *   where: {
+     *     // ... the filter for the GoldPrices we want to count
+     *   }
+     * })
+    **/
+    count<T extends GoldPriceCountArgs>(
+      args?: Subset<T, GoldPriceCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], GoldPriceCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a GoldPrice.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {GoldPriceAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends GoldPriceAggregateArgs>(args: Subset<T, GoldPriceAggregateArgs>): Prisma.PrismaPromise<GetGoldPriceAggregateType<T>>
+
+    /**
+     * Group by GoldPrice.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {GoldPriceGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends GoldPriceGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: GoldPriceGroupByArgs['orderBy'] }
+        : { orderBy?: GoldPriceGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, GoldPriceGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetGoldPriceGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the GoldPrice model
+   */
+  readonly fields: GoldPriceFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for GoldPrice.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__GoldPriceClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the GoldPrice model
+   */
+  interface GoldPriceFieldRefs {
+    readonly id: FieldRef<"GoldPrice", 'String'>
+    readonly date: FieldRef<"GoldPrice", 'DateTime'>
+    readonly openPrice: FieldRef<"GoldPrice", 'Float'>
+    readonly highPrice: FieldRef<"GoldPrice", 'Float'>
+    readonly lowPrice: FieldRef<"GoldPrice", 'Float'>
+    readonly closePrice: FieldRef<"GoldPrice", 'Float'>
+    readonly volume: FieldRef<"GoldPrice", 'Int'>
+    readonly changeAmount: FieldRef<"GoldPrice", 'Float'>
+    readonly changePercent: FieldRef<"GoldPrice", 'Float'>
+    readonly createdAt: FieldRef<"GoldPrice", 'DateTime'>
+    readonly updatedAt: FieldRef<"GoldPrice", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * GoldPrice findUnique
+   */
+  export type GoldPriceFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the GoldPrice
+     */
+    select?: GoldPriceSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the GoldPrice
+     */
+    omit?: GoldPriceOmit<ExtArgs> | null
+    /**
+     * Filter, which GoldPrice to fetch.
+     */
+    where: GoldPriceWhereUniqueInput
+  }
+
+  /**
+   * GoldPrice findUniqueOrThrow
+   */
+  export type GoldPriceFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the GoldPrice
+     */
+    select?: GoldPriceSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the GoldPrice
+     */
+    omit?: GoldPriceOmit<ExtArgs> | null
+    /**
+     * Filter, which GoldPrice to fetch.
+     */
+    where: GoldPriceWhereUniqueInput
+  }
+
+  /**
+   * GoldPrice findFirst
+   */
+  export type GoldPriceFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the GoldPrice
+     */
+    select?: GoldPriceSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the GoldPrice
+     */
+    omit?: GoldPriceOmit<ExtArgs> | null
+    /**
+     * Filter, which GoldPrice to fetch.
+     */
+    where?: GoldPriceWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of GoldPrices to fetch.
+     */
+    orderBy?: GoldPriceOrderByWithRelationInput | GoldPriceOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for GoldPrices.
+     */
+    cursor?: GoldPriceWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` GoldPrices from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` GoldPrices.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of GoldPrices.
+     */
+    distinct?: GoldPriceScalarFieldEnum | GoldPriceScalarFieldEnum[]
+  }
+
+  /**
+   * GoldPrice findFirstOrThrow
+   */
+  export type GoldPriceFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the GoldPrice
+     */
+    select?: GoldPriceSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the GoldPrice
+     */
+    omit?: GoldPriceOmit<ExtArgs> | null
+    /**
+     * Filter, which GoldPrice to fetch.
+     */
+    where?: GoldPriceWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of GoldPrices to fetch.
+     */
+    orderBy?: GoldPriceOrderByWithRelationInput | GoldPriceOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for GoldPrices.
+     */
+    cursor?: GoldPriceWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` GoldPrices from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` GoldPrices.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of GoldPrices.
+     */
+    distinct?: GoldPriceScalarFieldEnum | GoldPriceScalarFieldEnum[]
+  }
+
+  /**
+   * GoldPrice findMany
+   */
+  export type GoldPriceFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the GoldPrice
+     */
+    select?: GoldPriceSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the GoldPrice
+     */
+    omit?: GoldPriceOmit<ExtArgs> | null
+    /**
+     * Filter, which GoldPrices to fetch.
+     */
+    where?: GoldPriceWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of GoldPrices to fetch.
+     */
+    orderBy?: GoldPriceOrderByWithRelationInput | GoldPriceOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing GoldPrices.
+     */
+    cursor?: GoldPriceWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` GoldPrices from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` GoldPrices.
+     */
+    skip?: number
+    distinct?: GoldPriceScalarFieldEnum | GoldPriceScalarFieldEnum[]
+  }
+
+  /**
+   * GoldPrice create
+   */
+  export type GoldPriceCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the GoldPrice
+     */
+    select?: GoldPriceSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the GoldPrice
+     */
+    omit?: GoldPriceOmit<ExtArgs> | null
+    /**
+     * The data needed to create a GoldPrice.
+     */
+    data: XOR<GoldPriceCreateInput, GoldPriceUncheckedCreateInput>
+  }
+
+  /**
+   * GoldPrice createMany
+   */
+  export type GoldPriceCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many GoldPrices.
+     */
+    data: GoldPriceCreateManyInput | GoldPriceCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * GoldPrice createManyAndReturn
+   */
+  export type GoldPriceCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the GoldPrice
+     */
+    select?: GoldPriceSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the GoldPrice
+     */
+    omit?: GoldPriceOmit<ExtArgs> | null
+    /**
+     * The data used to create many GoldPrices.
+     */
+    data: GoldPriceCreateManyInput | GoldPriceCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * GoldPrice update
+   */
+  export type GoldPriceUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the GoldPrice
+     */
+    select?: GoldPriceSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the GoldPrice
+     */
+    omit?: GoldPriceOmit<ExtArgs> | null
+    /**
+     * The data needed to update a GoldPrice.
+     */
+    data: XOR<GoldPriceUpdateInput, GoldPriceUncheckedUpdateInput>
+    /**
+     * Choose, which GoldPrice to update.
+     */
+    where: GoldPriceWhereUniqueInput
+  }
+
+  /**
+   * GoldPrice updateMany
+   */
+  export type GoldPriceUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update GoldPrices.
+     */
+    data: XOR<GoldPriceUpdateManyMutationInput, GoldPriceUncheckedUpdateManyInput>
+    /**
+     * Filter which GoldPrices to update
+     */
+    where?: GoldPriceWhereInput
+    /**
+     * Limit how many GoldPrices to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * GoldPrice updateManyAndReturn
+   */
+  export type GoldPriceUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the GoldPrice
+     */
+    select?: GoldPriceSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the GoldPrice
+     */
+    omit?: GoldPriceOmit<ExtArgs> | null
+    /**
+     * The data used to update GoldPrices.
+     */
+    data: XOR<GoldPriceUpdateManyMutationInput, GoldPriceUncheckedUpdateManyInput>
+    /**
+     * Filter which GoldPrices to update
+     */
+    where?: GoldPriceWhereInput
+    /**
+     * Limit how many GoldPrices to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * GoldPrice upsert
+   */
+  export type GoldPriceUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the GoldPrice
+     */
+    select?: GoldPriceSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the GoldPrice
+     */
+    omit?: GoldPriceOmit<ExtArgs> | null
+    /**
+     * The filter to search for the GoldPrice to update in case it exists.
+     */
+    where: GoldPriceWhereUniqueInput
+    /**
+     * In case the GoldPrice found by the `where` argument doesn't exist, create a new GoldPrice with this data.
+     */
+    create: XOR<GoldPriceCreateInput, GoldPriceUncheckedCreateInput>
+    /**
+     * In case the GoldPrice was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<GoldPriceUpdateInput, GoldPriceUncheckedUpdateInput>
+  }
+
+  /**
+   * GoldPrice delete
+   */
+  export type GoldPriceDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the GoldPrice
+     */
+    select?: GoldPriceSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the GoldPrice
+     */
+    omit?: GoldPriceOmit<ExtArgs> | null
+    /**
+     * Filter which GoldPrice to delete.
+     */
+    where: GoldPriceWhereUniqueInput
+  }
+
+  /**
+   * GoldPrice deleteMany
+   */
+  export type GoldPriceDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which GoldPrices to delete
+     */
+    where?: GoldPriceWhereInput
+    /**
+     * Limit how many GoldPrices to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * GoldPrice without action
+   */
+  export type GoldPriceDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the GoldPrice
+     */
+    select?: GoldPriceSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the GoldPrice
+     */
+    omit?: GoldPriceOmit<ExtArgs> | null
+  }
+
 
   /**
    * Model User
@@ -7318,6 +8540,23 @@ export namespace Prisma {
   export type TransactionIsolationLevel = (typeof TransactionIsolationLevel)[keyof typeof TransactionIsolationLevel]
 
 
+  export const GoldPriceScalarFieldEnum: {
+    id: 'id',
+    date: 'date',
+    openPrice: 'openPrice',
+    highPrice: 'highPrice',
+    lowPrice: 'lowPrice',
+    closePrice: 'closePrice',
+    volume: 'volume',
+    changeAmount: 'changeAmount',
+    changePercent: 'changePercent',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
+  };
+
+  export type GoldPriceScalarFieldEnum = (typeof GoldPriceScalarFieldEnum)[keyof typeof GoldPriceScalarFieldEnum]
+
+
   export const UserScalarFieldEnum: {
     id: 'id',
     email: 'email',
@@ -7484,27 +8723,6 @@ export namespace Prisma {
 
 
   /**
-   * Reference to a field of type 'Json'
-   */
-  export type JsonFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Json'>
-    
-
-
-  /**
-   * Reference to a field of type 'QueryMode'
-   */
-  export type EnumQueryModeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'QueryMode'>
-    
-
-
-  /**
-   * Reference to a field of type 'Boolean'
-   */
-  export type BooleanFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Boolean'>
-    
-
-
-  /**
    * Reference to a field of type 'Float'
    */
   export type FloatFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Float'>
@@ -7530,10 +8748,115 @@ export namespace Prisma {
    */
   export type ListIntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Int[]'>
     
+
+
+  /**
+   * Reference to a field of type 'Json'
+   */
+  export type JsonFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Json'>
+    
+
+
+  /**
+   * Reference to a field of type 'QueryMode'
+   */
+  export type EnumQueryModeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'QueryMode'>
+    
+
+
+  /**
+   * Reference to a field of type 'Boolean'
+   */
+  export type BooleanFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Boolean'>
+    
   /**
    * Deep Input Types
    */
 
+
+  export type GoldPriceWhereInput = {
+    AND?: GoldPriceWhereInput | GoldPriceWhereInput[]
+    OR?: GoldPriceWhereInput[]
+    NOT?: GoldPriceWhereInput | GoldPriceWhereInput[]
+    id?: StringFilter<"GoldPrice"> | string
+    date?: DateTimeFilter<"GoldPrice"> | Date | string
+    openPrice?: FloatFilter<"GoldPrice"> | number
+    highPrice?: FloatFilter<"GoldPrice"> | number
+    lowPrice?: FloatFilter<"GoldPrice"> | number
+    closePrice?: FloatFilter<"GoldPrice"> | number
+    volume?: IntNullableFilter<"GoldPrice"> | number | null
+    changeAmount?: FloatNullableFilter<"GoldPrice"> | number | null
+    changePercent?: FloatNullableFilter<"GoldPrice"> | number | null
+    createdAt?: DateTimeFilter<"GoldPrice"> | Date | string
+    updatedAt?: DateTimeFilter<"GoldPrice"> | Date | string
+  }
+
+  export type GoldPriceOrderByWithRelationInput = {
+    id?: SortOrder
+    date?: SortOrder
+    openPrice?: SortOrder
+    highPrice?: SortOrder
+    lowPrice?: SortOrder
+    closePrice?: SortOrder
+    volume?: SortOrderInput | SortOrder
+    changeAmount?: SortOrderInput | SortOrder
+    changePercent?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type GoldPriceWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    date?: Date | string
+    AND?: GoldPriceWhereInput | GoldPriceWhereInput[]
+    OR?: GoldPriceWhereInput[]
+    NOT?: GoldPriceWhereInput | GoldPriceWhereInput[]
+    openPrice?: FloatFilter<"GoldPrice"> | number
+    highPrice?: FloatFilter<"GoldPrice"> | number
+    lowPrice?: FloatFilter<"GoldPrice"> | number
+    closePrice?: FloatFilter<"GoldPrice"> | number
+    volume?: IntNullableFilter<"GoldPrice"> | number | null
+    changeAmount?: FloatNullableFilter<"GoldPrice"> | number | null
+    changePercent?: FloatNullableFilter<"GoldPrice"> | number | null
+    createdAt?: DateTimeFilter<"GoldPrice"> | Date | string
+    updatedAt?: DateTimeFilter<"GoldPrice"> | Date | string
+  }, "id" | "date">
+
+  export type GoldPriceOrderByWithAggregationInput = {
+    id?: SortOrder
+    date?: SortOrder
+    openPrice?: SortOrder
+    highPrice?: SortOrder
+    lowPrice?: SortOrder
+    closePrice?: SortOrder
+    volume?: SortOrderInput | SortOrder
+    changeAmount?: SortOrderInput | SortOrder
+    changePercent?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    _count?: GoldPriceCountOrderByAggregateInput
+    _avg?: GoldPriceAvgOrderByAggregateInput
+    _max?: GoldPriceMaxOrderByAggregateInput
+    _min?: GoldPriceMinOrderByAggregateInput
+    _sum?: GoldPriceSumOrderByAggregateInput
+  }
+
+  export type GoldPriceScalarWhereWithAggregatesInput = {
+    AND?: GoldPriceScalarWhereWithAggregatesInput | GoldPriceScalarWhereWithAggregatesInput[]
+    OR?: GoldPriceScalarWhereWithAggregatesInput[]
+    NOT?: GoldPriceScalarWhereWithAggregatesInput | GoldPriceScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"GoldPrice"> | string
+    date?: DateTimeWithAggregatesFilter<"GoldPrice"> | Date | string
+    openPrice?: FloatWithAggregatesFilter<"GoldPrice"> | number
+    highPrice?: FloatWithAggregatesFilter<"GoldPrice"> | number
+    lowPrice?: FloatWithAggregatesFilter<"GoldPrice"> | number
+    closePrice?: FloatWithAggregatesFilter<"GoldPrice"> | number
+    volume?: IntNullableWithAggregatesFilter<"GoldPrice"> | number | null
+    changeAmount?: FloatNullableWithAggregatesFilter<"GoldPrice"> | number | null
+    changePercent?: FloatNullableWithAggregatesFilter<"GoldPrice"> | number | null
+    createdAt?: DateTimeWithAggregatesFilter<"GoldPrice"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"GoldPrice"> | Date | string
+  }
 
   export type UserWhereInput = {
     AND?: UserWhereInput | UserWhereInput[]
@@ -8011,6 +9334,104 @@ export namespace Prisma {
     notifyInApp?: BoolWithAggregatesFilter<"Alert"> | boolean
     userId?: StringWithAggregatesFilter<"Alert"> | string
     recommendationId?: StringNullableWithAggregatesFilter<"Alert"> | string | null
+  }
+
+  export type GoldPriceCreateInput = {
+    id?: string
+    date: Date | string
+    openPrice: number
+    highPrice: number
+    lowPrice: number
+    closePrice: number
+    volume?: number | null
+    changeAmount?: number | null
+    changePercent?: number | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type GoldPriceUncheckedCreateInput = {
+    id?: string
+    date: Date | string
+    openPrice: number
+    highPrice: number
+    lowPrice: number
+    closePrice: number
+    volume?: number | null
+    changeAmount?: number | null
+    changePercent?: number | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type GoldPriceUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    date?: DateTimeFieldUpdateOperationsInput | Date | string
+    openPrice?: FloatFieldUpdateOperationsInput | number
+    highPrice?: FloatFieldUpdateOperationsInput | number
+    lowPrice?: FloatFieldUpdateOperationsInput | number
+    closePrice?: FloatFieldUpdateOperationsInput | number
+    volume?: NullableIntFieldUpdateOperationsInput | number | null
+    changeAmount?: NullableFloatFieldUpdateOperationsInput | number | null
+    changePercent?: NullableFloatFieldUpdateOperationsInput | number | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type GoldPriceUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    date?: DateTimeFieldUpdateOperationsInput | Date | string
+    openPrice?: FloatFieldUpdateOperationsInput | number
+    highPrice?: FloatFieldUpdateOperationsInput | number
+    lowPrice?: FloatFieldUpdateOperationsInput | number
+    closePrice?: FloatFieldUpdateOperationsInput | number
+    volume?: NullableIntFieldUpdateOperationsInput | number | null
+    changeAmount?: NullableFloatFieldUpdateOperationsInput | number | null
+    changePercent?: NullableFloatFieldUpdateOperationsInput | number | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type GoldPriceCreateManyInput = {
+    id?: string
+    date: Date | string
+    openPrice: number
+    highPrice: number
+    lowPrice: number
+    closePrice: number
+    volume?: number | null
+    changeAmount?: number | null
+    changePercent?: number | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type GoldPriceUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    date?: DateTimeFieldUpdateOperationsInput | Date | string
+    openPrice?: FloatFieldUpdateOperationsInput | number
+    highPrice?: FloatFieldUpdateOperationsInput | number
+    lowPrice?: FloatFieldUpdateOperationsInput | number
+    closePrice?: FloatFieldUpdateOperationsInput | number
+    volume?: NullableIntFieldUpdateOperationsInput | number | null
+    changeAmount?: NullableFloatFieldUpdateOperationsInput | number | null
+    changePercent?: NullableFloatFieldUpdateOperationsInput | number | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type GoldPriceUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    date?: DateTimeFieldUpdateOperationsInput | Date | string
+    openPrice?: FloatFieldUpdateOperationsInput | number
+    highPrice?: FloatFieldUpdateOperationsInput | number
+    lowPrice?: FloatFieldUpdateOperationsInput | number
+    closePrice?: FloatFieldUpdateOperationsInput | number
+    volume?: NullableIntFieldUpdateOperationsInput | number | null
+    changeAmount?: NullableFloatFieldUpdateOperationsInput | number | null
+    changePercent?: NullableFloatFieldUpdateOperationsInput | number | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type UserCreateInput = {
@@ -8583,6 +10004,197 @@ export namespace Prisma {
     not?: NestedStringFilter<$PrismaModel> | string
   }
 
+  export type DateTimeFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
+    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeFilter<$PrismaModel> | Date | string
+  }
+
+  export type FloatFilter<$PrismaModel = never> = {
+    equals?: number | FloatFieldRefInput<$PrismaModel>
+    in?: number[] | ListFloatFieldRefInput<$PrismaModel>
+    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel>
+    lt?: number | FloatFieldRefInput<$PrismaModel>
+    lte?: number | FloatFieldRefInput<$PrismaModel>
+    gt?: number | FloatFieldRefInput<$PrismaModel>
+    gte?: number | FloatFieldRefInput<$PrismaModel>
+    not?: NestedFloatFilter<$PrismaModel> | number
+  }
+
+  export type IntNullableFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel> | null
+    in?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntNullableFilter<$PrismaModel> | number | null
+  }
+
+  export type FloatNullableFilter<$PrismaModel = never> = {
+    equals?: number | FloatFieldRefInput<$PrismaModel> | null
+    in?: number[] | ListFloatFieldRefInput<$PrismaModel> | null
+    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel> | null
+    lt?: number | FloatFieldRefInput<$PrismaModel>
+    lte?: number | FloatFieldRefInput<$PrismaModel>
+    gt?: number | FloatFieldRefInput<$PrismaModel>
+    gte?: number | FloatFieldRefInput<$PrismaModel>
+    not?: NestedFloatNullableFilter<$PrismaModel> | number | null
+  }
+
+  export type SortOrderInput = {
+    sort: SortOrder
+    nulls?: NullsOrder
+  }
+
+  export type GoldPriceCountOrderByAggregateInput = {
+    id?: SortOrder
+    date?: SortOrder
+    openPrice?: SortOrder
+    highPrice?: SortOrder
+    lowPrice?: SortOrder
+    closePrice?: SortOrder
+    volume?: SortOrder
+    changeAmount?: SortOrder
+    changePercent?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type GoldPriceAvgOrderByAggregateInput = {
+    openPrice?: SortOrder
+    highPrice?: SortOrder
+    lowPrice?: SortOrder
+    closePrice?: SortOrder
+    volume?: SortOrder
+    changeAmount?: SortOrder
+    changePercent?: SortOrder
+  }
+
+  export type GoldPriceMaxOrderByAggregateInput = {
+    id?: SortOrder
+    date?: SortOrder
+    openPrice?: SortOrder
+    highPrice?: SortOrder
+    lowPrice?: SortOrder
+    closePrice?: SortOrder
+    volume?: SortOrder
+    changeAmount?: SortOrder
+    changePercent?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type GoldPriceMinOrderByAggregateInput = {
+    id?: SortOrder
+    date?: SortOrder
+    openPrice?: SortOrder
+    highPrice?: SortOrder
+    lowPrice?: SortOrder
+    closePrice?: SortOrder
+    volume?: SortOrder
+    changeAmount?: SortOrder
+    changePercent?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type GoldPriceSumOrderByAggregateInput = {
+    openPrice?: SortOrder
+    highPrice?: SortOrder
+    lowPrice?: SortOrder
+    closePrice?: SortOrder
+    volume?: SortOrder
+    changeAmount?: SortOrder
+    changePercent?: SortOrder
+  }
+
+  export type StringWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: string | StringFieldRefInput<$PrismaModel>
+    in?: string[] | ListStringFieldRefInput<$PrismaModel>
+    notIn?: string[] | ListStringFieldRefInput<$PrismaModel>
+    lt?: string | StringFieldRefInput<$PrismaModel>
+    lte?: string | StringFieldRefInput<$PrismaModel>
+    gt?: string | StringFieldRefInput<$PrismaModel>
+    gte?: string | StringFieldRefInput<$PrismaModel>
+    contains?: string | StringFieldRefInput<$PrismaModel>
+    startsWith?: string | StringFieldRefInput<$PrismaModel>
+    endsWith?: string | StringFieldRefInput<$PrismaModel>
+    mode?: QueryMode
+    not?: NestedStringWithAggregatesFilter<$PrismaModel> | string
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedStringFilter<$PrismaModel>
+    _max?: NestedStringFilter<$PrismaModel>
+  }
+
+  export type DateTimeWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
+    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeWithAggregatesFilter<$PrismaModel> | Date | string
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedDateTimeFilter<$PrismaModel>
+    _max?: NestedDateTimeFilter<$PrismaModel>
+  }
+
+  export type FloatWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: number | FloatFieldRefInput<$PrismaModel>
+    in?: number[] | ListFloatFieldRefInput<$PrismaModel>
+    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel>
+    lt?: number | FloatFieldRefInput<$PrismaModel>
+    lte?: number | FloatFieldRefInput<$PrismaModel>
+    gt?: number | FloatFieldRefInput<$PrismaModel>
+    gte?: number | FloatFieldRefInput<$PrismaModel>
+    not?: NestedFloatWithAggregatesFilter<$PrismaModel> | number
+    _count?: NestedIntFilter<$PrismaModel>
+    _avg?: NestedFloatFilter<$PrismaModel>
+    _sum?: NestedFloatFilter<$PrismaModel>
+    _min?: NestedFloatFilter<$PrismaModel>
+    _max?: NestedFloatFilter<$PrismaModel>
+  }
+
+  export type IntNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel> | null
+    in?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntNullableWithAggregatesFilter<$PrismaModel> | number | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _avg?: NestedFloatNullableFilter<$PrismaModel>
+    _sum?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedIntNullableFilter<$PrismaModel>
+    _max?: NestedIntNullableFilter<$PrismaModel>
+  }
+
+  export type FloatNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: number | FloatFieldRefInput<$PrismaModel> | null
+    in?: number[] | ListFloatFieldRefInput<$PrismaModel> | null
+    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel> | null
+    lt?: number | FloatFieldRefInput<$PrismaModel>
+    lte?: number | FloatFieldRefInput<$PrismaModel>
+    gt?: number | FloatFieldRefInput<$PrismaModel>
+    gte?: number | FloatFieldRefInput<$PrismaModel>
+    not?: NestedFloatNullableWithAggregatesFilter<$PrismaModel> | number | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _avg?: NestedFloatNullableFilter<$PrismaModel>
+    _sum?: NestedFloatNullableFilter<$PrismaModel>
+    _min?: NestedFloatNullableFilter<$PrismaModel>
+    _max?: NestedFloatNullableFilter<$PrismaModel>
+  }
+
   export type StringNullableFilter<$PrismaModel = never> = {
     equals?: string | StringFieldRefInput<$PrismaModel> | null
     in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
@@ -8596,17 +10208,6 @@ export namespace Prisma {
     endsWith?: string | StringFieldRefInput<$PrismaModel>
     mode?: QueryMode
     not?: NestedStringNullableFilter<$PrismaModel> | string | null
-  }
-
-  export type DateTimeFilter<$PrismaModel = never> = {
-    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
-    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
-    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    not?: NestedDateTimeFilter<$PrismaModel> | Date | string
   }
 
   export type UserPreferenceNullableScalarRelationFilter = {
@@ -8629,11 +10230,6 @@ export namespace Prisma {
     every?: RecommendationWhereInput
     some?: RecommendationWhereInput
     none?: RecommendationWhereInput
-  }
-
-  export type SortOrderInput = {
-    sort: SortOrder
-    nulls?: NullsOrder
   }
 
   export type AlertOrderByRelationAggregateInput = {
@@ -8674,24 +10270,6 @@ export namespace Prisma {
     authId?: SortOrder
   }
 
-  export type StringWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: string | StringFieldRefInput<$PrismaModel>
-    in?: string[] | ListStringFieldRefInput<$PrismaModel>
-    notIn?: string[] | ListStringFieldRefInput<$PrismaModel>
-    lt?: string | StringFieldRefInput<$PrismaModel>
-    lte?: string | StringFieldRefInput<$PrismaModel>
-    gt?: string | StringFieldRefInput<$PrismaModel>
-    gte?: string | StringFieldRefInput<$PrismaModel>
-    contains?: string | StringFieldRefInput<$PrismaModel>
-    startsWith?: string | StringFieldRefInput<$PrismaModel>
-    endsWith?: string | StringFieldRefInput<$PrismaModel>
-    mode?: QueryMode
-    not?: NestedStringWithAggregatesFilter<$PrismaModel> | string
-    _count?: NestedIntFilter<$PrismaModel>
-    _min?: NestedStringFilter<$PrismaModel>
-    _max?: NestedStringFilter<$PrismaModel>
-  }
-
   export type StringNullableWithAggregatesFilter<$PrismaModel = never> = {
     equals?: string | StringFieldRefInput<$PrismaModel> | null
     in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
@@ -8708,20 +10286,6 @@ export namespace Prisma {
     _count?: NestedIntNullableFilter<$PrismaModel>
     _min?: NestedStringNullableFilter<$PrismaModel>
     _max?: NestedStringNullableFilter<$PrismaModel>
-  }
-
-  export type DateTimeWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
-    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
-    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    not?: NestedDateTimeWithAggregatesFilter<$PrismaModel> | Date | string
-    _count?: NestedIntFilter<$PrismaModel>
-    _min?: NestedDateTimeFilter<$PrismaModel>
-    _max?: NestedDateTimeFilter<$PrismaModel>
   }
   export type JsonNullableFilter<$PrismaModel = never> =
     | PatchUndefined<
@@ -8902,28 +10466,6 @@ export namespace Prisma {
     _max?: NestedDateTimeNullableFilter<$PrismaModel>
   }
 
-  export type FloatFilter<$PrismaModel = never> = {
-    equals?: number | FloatFieldRefInput<$PrismaModel>
-    in?: number[] | ListFloatFieldRefInput<$PrismaModel>
-    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel>
-    lt?: number | FloatFieldRefInput<$PrismaModel>
-    lte?: number | FloatFieldRefInput<$PrismaModel>
-    gt?: number | FloatFieldRefInput<$PrismaModel>
-    gte?: number | FloatFieldRefInput<$PrismaModel>
-    not?: NestedFloatFilter<$PrismaModel> | number
-  }
-
-  export type FloatNullableFilter<$PrismaModel = never> = {
-    equals?: number | FloatFieldRefInput<$PrismaModel> | null
-    in?: number[] | ListFloatFieldRefInput<$PrismaModel> | null
-    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel> | null
-    lt?: number | FloatFieldRefInput<$PrismaModel>
-    lte?: number | FloatFieldRefInput<$PrismaModel>
-    gt?: number | FloatFieldRefInput<$PrismaModel>
-    gte?: number | FloatFieldRefInput<$PrismaModel>
-    not?: NestedFloatNullableFilter<$PrismaModel> | number | null
-  }
-
   export type UserListRelationFilter = {
     every?: UserWhereInput
     some?: UserWhereInput
@@ -8993,38 +10535,6 @@ export namespace Prisma {
     accuracy?: SortOrder
   }
 
-  export type FloatWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: number | FloatFieldRefInput<$PrismaModel>
-    in?: number[] | ListFloatFieldRefInput<$PrismaModel>
-    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel>
-    lt?: number | FloatFieldRefInput<$PrismaModel>
-    lte?: number | FloatFieldRefInput<$PrismaModel>
-    gt?: number | FloatFieldRefInput<$PrismaModel>
-    gte?: number | FloatFieldRefInput<$PrismaModel>
-    not?: NestedFloatWithAggregatesFilter<$PrismaModel> | number
-    _count?: NestedIntFilter<$PrismaModel>
-    _avg?: NestedFloatFilter<$PrismaModel>
-    _sum?: NestedFloatFilter<$PrismaModel>
-    _min?: NestedFloatFilter<$PrismaModel>
-    _max?: NestedFloatFilter<$PrismaModel>
-  }
-
-  export type FloatNullableWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: number | FloatFieldRefInput<$PrismaModel> | null
-    in?: number[] | ListFloatFieldRefInput<$PrismaModel> | null
-    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel> | null
-    lt?: number | FloatFieldRefInput<$PrismaModel>
-    lte?: number | FloatFieldRefInput<$PrismaModel>
-    gt?: number | FloatFieldRefInput<$PrismaModel>
-    gte?: number | FloatFieldRefInput<$PrismaModel>
-    not?: NestedFloatNullableWithAggregatesFilter<$PrismaModel> | number | null
-    _count?: NestedIntNullableFilter<$PrismaModel>
-    _avg?: NestedFloatNullableFilter<$PrismaModel>
-    _sum?: NestedFloatNullableFilter<$PrismaModel>
-    _min?: NestedFloatNullableFilter<$PrismaModel>
-    _max?: NestedFloatNullableFilter<$PrismaModel>
-  }
-
   export type RecommendationNullableScalarRelationFilter = {
     is?: RecommendationWhereInput | null
     isNot?: RecommendationWhereInput | null
@@ -9085,6 +10595,38 @@ export namespace Prisma {
     notifyInApp?: SortOrder
     userId?: SortOrder
     recommendationId?: SortOrder
+  }
+
+  export type StringFieldUpdateOperationsInput = {
+    set?: string
+  }
+
+  export type DateTimeFieldUpdateOperationsInput = {
+    set?: Date | string
+  }
+
+  export type FloatFieldUpdateOperationsInput = {
+    set?: number
+    increment?: number
+    decrement?: number
+    multiply?: number
+    divide?: number
+  }
+
+  export type NullableIntFieldUpdateOperationsInput = {
+    set?: number | null
+    increment?: number
+    decrement?: number
+    multiply?: number
+    divide?: number
+  }
+
+  export type NullableFloatFieldUpdateOperationsInput = {
+    set?: number | null
+    increment?: number
+    decrement?: number
+    multiply?: number
+    divide?: number
   }
 
   export type UserPreferenceCreateNestedOneWithoutUserInput = {
@@ -9151,16 +10693,8 @@ export namespace Prisma {
     connect?: RecommendationWhereUniqueInput | RecommendationWhereUniqueInput[]
   }
 
-  export type StringFieldUpdateOperationsInput = {
-    set?: string
-  }
-
   export type NullableStringFieldUpdateOperationsInput = {
     set?: string | null
-  }
-
-  export type DateTimeFieldUpdateOperationsInput = {
-    set?: Date | string
   }
 
   export type UserPreferenceUpdateOneWithoutUserNestedInput = {
@@ -9353,22 +10887,6 @@ export namespace Prisma {
     connect?: AlertWhereUniqueInput | AlertWhereUniqueInput[]
   }
 
-  export type FloatFieldUpdateOperationsInput = {
-    set?: number
-    increment?: number
-    decrement?: number
-    multiply?: number
-    divide?: number
-  }
-
-  export type NullableFloatFieldUpdateOperationsInput = {
-    set?: number | null
-    increment?: number
-    decrement?: number
-    multiply?: number
-    divide?: number
-  }
-
   export type UserUpdateOneRequiredWithoutRecommendationsNestedInput = {
     create?: XOR<UserCreateWithoutRecommendationsInput, UserUncheckedCreateWithoutRecommendationsInput>
     connectOrCreate?: UserCreateOrConnectWithoutRecommendationsInput
@@ -9475,20 +10993,6 @@ export namespace Prisma {
     not?: NestedStringFilter<$PrismaModel> | string
   }
 
-  export type NestedStringNullableFilter<$PrismaModel = never> = {
-    equals?: string | StringFieldRefInput<$PrismaModel> | null
-    in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
-    notIn?: string[] | ListStringFieldRefInput<$PrismaModel> | null
-    lt?: string | StringFieldRefInput<$PrismaModel>
-    lte?: string | StringFieldRefInput<$PrismaModel>
-    gt?: string | StringFieldRefInput<$PrismaModel>
-    gte?: string | StringFieldRefInput<$PrismaModel>
-    contains?: string | StringFieldRefInput<$PrismaModel>
-    startsWith?: string | StringFieldRefInput<$PrismaModel>
-    endsWith?: string | StringFieldRefInput<$PrismaModel>
-    not?: NestedStringNullableFilter<$PrismaModel> | string | null
-  }
-
   export type NestedDateTimeFilter<$PrismaModel = never> = {
     equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
     in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
@@ -9498,6 +11002,39 @@ export namespace Prisma {
     gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
     gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
     not?: NestedDateTimeFilter<$PrismaModel> | Date | string
+  }
+
+  export type NestedFloatFilter<$PrismaModel = never> = {
+    equals?: number | FloatFieldRefInput<$PrismaModel>
+    in?: number[] | ListFloatFieldRefInput<$PrismaModel>
+    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel>
+    lt?: number | FloatFieldRefInput<$PrismaModel>
+    lte?: number | FloatFieldRefInput<$PrismaModel>
+    gt?: number | FloatFieldRefInput<$PrismaModel>
+    gte?: number | FloatFieldRefInput<$PrismaModel>
+    not?: NestedFloatFilter<$PrismaModel> | number
+  }
+
+  export type NestedIntNullableFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel> | null
+    in?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntNullableFilter<$PrismaModel> | number | null
+  }
+
+  export type NestedFloatNullableFilter<$PrismaModel = never> = {
+    equals?: number | FloatFieldRefInput<$PrismaModel> | null
+    in?: number[] | ListFloatFieldRefInput<$PrismaModel> | null
+    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel> | null
+    lt?: number | FloatFieldRefInput<$PrismaModel>
+    lte?: number | FloatFieldRefInput<$PrismaModel>
+    gt?: number | FloatFieldRefInput<$PrismaModel>
+    gte?: number | FloatFieldRefInput<$PrismaModel>
+    not?: NestedFloatNullableFilter<$PrismaModel> | number | null
   }
 
   export type NestedStringWithAggregatesFilter<$PrismaModel = never> = {
@@ -9528,6 +11065,82 @@ export namespace Prisma {
     not?: NestedIntFilter<$PrismaModel> | number
   }
 
+  export type NestedDateTimeWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
+    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeWithAggregatesFilter<$PrismaModel> | Date | string
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedDateTimeFilter<$PrismaModel>
+    _max?: NestedDateTimeFilter<$PrismaModel>
+  }
+
+  export type NestedFloatWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: number | FloatFieldRefInput<$PrismaModel>
+    in?: number[] | ListFloatFieldRefInput<$PrismaModel>
+    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel>
+    lt?: number | FloatFieldRefInput<$PrismaModel>
+    lte?: number | FloatFieldRefInput<$PrismaModel>
+    gt?: number | FloatFieldRefInput<$PrismaModel>
+    gte?: number | FloatFieldRefInput<$PrismaModel>
+    not?: NestedFloatWithAggregatesFilter<$PrismaModel> | number
+    _count?: NestedIntFilter<$PrismaModel>
+    _avg?: NestedFloatFilter<$PrismaModel>
+    _sum?: NestedFloatFilter<$PrismaModel>
+    _min?: NestedFloatFilter<$PrismaModel>
+    _max?: NestedFloatFilter<$PrismaModel>
+  }
+
+  export type NestedIntNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel> | null
+    in?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntNullableWithAggregatesFilter<$PrismaModel> | number | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _avg?: NestedFloatNullableFilter<$PrismaModel>
+    _sum?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedIntNullableFilter<$PrismaModel>
+    _max?: NestedIntNullableFilter<$PrismaModel>
+  }
+
+  export type NestedFloatNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: number | FloatFieldRefInput<$PrismaModel> | null
+    in?: number[] | ListFloatFieldRefInput<$PrismaModel> | null
+    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel> | null
+    lt?: number | FloatFieldRefInput<$PrismaModel>
+    lte?: number | FloatFieldRefInput<$PrismaModel>
+    gt?: number | FloatFieldRefInput<$PrismaModel>
+    gte?: number | FloatFieldRefInput<$PrismaModel>
+    not?: NestedFloatNullableWithAggregatesFilter<$PrismaModel> | number | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _avg?: NestedFloatNullableFilter<$PrismaModel>
+    _sum?: NestedFloatNullableFilter<$PrismaModel>
+    _min?: NestedFloatNullableFilter<$PrismaModel>
+    _max?: NestedFloatNullableFilter<$PrismaModel>
+  }
+
+  export type NestedStringNullableFilter<$PrismaModel = never> = {
+    equals?: string | StringFieldRefInput<$PrismaModel> | null
+    in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    notIn?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    lt?: string | StringFieldRefInput<$PrismaModel>
+    lte?: string | StringFieldRefInput<$PrismaModel>
+    gt?: string | StringFieldRefInput<$PrismaModel>
+    gte?: string | StringFieldRefInput<$PrismaModel>
+    contains?: string | StringFieldRefInput<$PrismaModel>
+    startsWith?: string | StringFieldRefInput<$PrismaModel>
+    endsWith?: string | StringFieldRefInput<$PrismaModel>
+    not?: NestedStringNullableFilter<$PrismaModel> | string | null
+  }
+
   export type NestedStringNullableWithAggregatesFilter<$PrismaModel = never> = {
     equals?: string | StringFieldRefInput<$PrismaModel> | null
     in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
@@ -9543,31 +11156,6 @@ export namespace Prisma {
     _count?: NestedIntNullableFilter<$PrismaModel>
     _min?: NestedStringNullableFilter<$PrismaModel>
     _max?: NestedStringNullableFilter<$PrismaModel>
-  }
-
-  export type NestedIntNullableFilter<$PrismaModel = never> = {
-    equals?: number | IntFieldRefInput<$PrismaModel> | null
-    in?: number[] | ListIntFieldRefInput<$PrismaModel> | null
-    notIn?: number[] | ListIntFieldRefInput<$PrismaModel> | null
-    lt?: number | IntFieldRefInput<$PrismaModel>
-    lte?: number | IntFieldRefInput<$PrismaModel>
-    gt?: number | IntFieldRefInput<$PrismaModel>
-    gte?: number | IntFieldRefInput<$PrismaModel>
-    not?: NestedIntNullableFilter<$PrismaModel> | number | null
-  }
-
-  export type NestedDateTimeWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
-    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
-    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    not?: NestedDateTimeWithAggregatesFilter<$PrismaModel> | Date | string
-    _count?: NestedIntFilter<$PrismaModel>
-    _min?: NestedDateTimeFilter<$PrismaModel>
-    _max?: NestedDateTimeFilter<$PrismaModel>
   }
 
   export type NestedBoolFilter<$PrismaModel = never> = {
@@ -9629,60 +11217,6 @@ export namespace Prisma {
     _count?: NestedIntNullableFilter<$PrismaModel>
     _min?: NestedDateTimeNullableFilter<$PrismaModel>
     _max?: NestedDateTimeNullableFilter<$PrismaModel>
-  }
-
-  export type NestedFloatFilter<$PrismaModel = never> = {
-    equals?: number | FloatFieldRefInput<$PrismaModel>
-    in?: number[] | ListFloatFieldRefInput<$PrismaModel>
-    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel>
-    lt?: number | FloatFieldRefInput<$PrismaModel>
-    lte?: number | FloatFieldRefInput<$PrismaModel>
-    gt?: number | FloatFieldRefInput<$PrismaModel>
-    gte?: number | FloatFieldRefInput<$PrismaModel>
-    not?: NestedFloatFilter<$PrismaModel> | number
-  }
-
-  export type NestedFloatNullableFilter<$PrismaModel = never> = {
-    equals?: number | FloatFieldRefInput<$PrismaModel> | null
-    in?: number[] | ListFloatFieldRefInput<$PrismaModel> | null
-    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel> | null
-    lt?: number | FloatFieldRefInput<$PrismaModel>
-    lte?: number | FloatFieldRefInput<$PrismaModel>
-    gt?: number | FloatFieldRefInput<$PrismaModel>
-    gte?: number | FloatFieldRefInput<$PrismaModel>
-    not?: NestedFloatNullableFilter<$PrismaModel> | number | null
-  }
-
-  export type NestedFloatWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: number | FloatFieldRefInput<$PrismaModel>
-    in?: number[] | ListFloatFieldRefInput<$PrismaModel>
-    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel>
-    lt?: number | FloatFieldRefInput<$PrismaModel>
-    lte?: number | FloatFieldRefInput<$PrismaModel>
-    gt?: number | FloatFieldRefInput<$PrismaModel>
-    gte?: number | FloatFieldRefInput<$PrismaModel>
-    not?: NestedFloatWithAggregatesFilter<$PrismaModel> | number
-    _count?: NestedIntFilter<$PrismaModel>
-    _avg?: NestedFloatFilter<$PrismaModel>
-    _sum?: NestedFloatFilter<$PrismaModel>
-    _min?: NestedFloatFilter<$PrismaModel>
-    _max?: NestedFloatFilter<$PrismaModel>
-  }
-
-  export type NestedFloatNullableWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: number | FloatFieldRefInput<$PrismaModel> | null
-    in?: number[] | ListFloatFieldRefInput<$PrismaModel> | null
-    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel> | null
-    lt?: number | FloatFieldRefInput<$PrismaModel>
-    lte?: number | FloatFieldRefInput<$PrismaModel>
-    gt?: number | FloatFieldRefInput<$PrismaModel>
-    gte?: number | FloatFieldRefInput<$PrismaModel>
-    not?: NestedFloatNullableWithAggregatesFilter<$PrismaModel> | number | null
-    _count?: NestedIntNullableFilter<$PrismaModel>
-    _avg?: NestedFloatNullableFilter<$PrismaModel>
-    _sum?: NestedFloatNullableFilter<$PrismaModel>
-    _min?: NestedFloatNullableFilter<$PrismaModel>
-    _max?: NestedFloatNullableFilter<$PrismaModel>
   }
 
   export type UserPreferenceCreateWithoutUserInput = {

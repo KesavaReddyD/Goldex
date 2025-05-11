@@ -117,6 +117,20 @@ exports.Prisma.TransactionIsolationLevel = makeStrictEnum({
   Serializable: 'Serializable'
 });
 
+exports.Prisma.GoldPriceScalarFieldEnum = {
+  id: 'id',
+  date: 'date',
+  openPrice: 'openPrice',
+  highPrice: 'highPrice',
+  lowPrice: 'lowPrice',
+  closePrice: 'closePrice',
+  volume: 'volume',
+  changeAmount: 'changeAmount',
+  changePercent: 'changePercent',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
 exports.Prisma.UserScalarFieldEnum = {
   id: 'id',
   email: 'email',
@@ -221,6 +235,7 @@ exports.Prisma.JsonNullValueFilter = {
 
 
 exports.Prisma.ModelName = {
+  GoldPrice: 'GoldPrice',
   User: 'User',
   UserPreference: 'UserPreference',
   Subscription: 'Subscription',

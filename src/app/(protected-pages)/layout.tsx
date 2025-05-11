@@ -1,31 +1,47 @@
-import { redirect } from 'next/navigation';
-import { DashboardNav } from './_components/dashboard-nav';
-import { SiteHeader } from './_components/site-header';
-import { requireAuth } from '@/lib/auth';
+'use client';
 
-export default async function DashboardLayout({
+import { useEffect } from 'react';
+import { useRouter } from 'next/navigation';
+import { useAuth } from '@/providers/auth-provider';
+import { SiteHeader } from './_components/site-header';
+// import { Sidebar } from './_components/sidebar';
+
+export default function ProtectedLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
-  // Check if user is authenticated
-  try {
-    await requireAuth();
-  } catch (error) {
-    redirect('/sign-in');
+  const { user, loading } = useAuth();
+  const router = useRouter();
+  
+  // Redirect to sign-in if not authenticated
+  useEffect(() => {
+    if (!loading && !user) {
+      router.push('/sign-in');
+    }
+  }, [user, loading, router]);
+  
+  if (loading) {
+    return (
+      <div className="flex h-screen w-full items-center justify-center">
+        <div className="h-8 w-8 animate-spin rounded-full border-b-2 border-primary"></div>
+      </div>
+    );
+  }
+  
+  if (!user) {
+    return null; // Will redirect in useEffect
   }
 
   return (
-    <div className="flex min-h-screen flex-col">
+    <div className="flex h-screen flex-col">
       <SiteHeader />
-      <div className="container flex-1 items-start md:grid md:grid-cols-[220px_1fr] md:gap-6 md:py-6">
-        <aside className="fixed top-14 z-30 -ml-2 hidden h-[calc(100vh-3.5rem)] w-full shrink-0 md:sticky md:block">
-          <DashboardNav />
-        </aside>
-        <main className="relative py-6 md:py-0">
+      {/* <div className="flex flex-1 overflow-hidden">
+        <Sidebar /> */}
+        <main className="flex-1 overflow-y-auto p-6">
           {children}
         </main>
-      </div>
+      {/* </div> */}
     </div>
   );
 } 
