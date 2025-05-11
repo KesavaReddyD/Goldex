@@ -23,7 +23,7 @@ export function UserNav() {
     try {
       await signOut();
       toast.success("Signed out successfully");
-    } catch (error) {
+    } catch  {
       toast.error("Error signing out");
     }
   };

@@ -71,7 +71,7 @@ export default function SignUpPage() {
 
       // Redirect to confirmation page
       router.push('/sign-in');
-    } catch (error) {
+    } catch {
       toast.error("Something went wrong", {
         description: 'An error occurred during sign up.'
       });
@@ -84,7 +84,7 @@ export default function SignUpPage() {
     try {
       await signInWithGoogle();
       // No need to redirect, as it will be handled by the OAuth callback
-    } catch (error) {
+    } catch {
       toast.error("Google sign in failed", {
         description: 'Please try again or use email sign up.'
       });

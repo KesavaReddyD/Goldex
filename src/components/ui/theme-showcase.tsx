@@ -2,7 +2,6 @@
 
 import * as React from "react";
 import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge";
 import { ThemeToggle } from "@/components/theme-toggle";
 import { CheckIcon, ArrowRightIcon, BrainCircuitIcon, PenBoxIcon, LayoutGridIcon, SparklesIcon, HeartIcon } from "lucide-react";
 
@@ -227,7 +226,7 @@ export function ThemeShowcase() {
                 ))}
               </div>
               <p className="text-text-secondary mb-6">
-                "I suggest that the top planners spend most of their time engaged in analysis and planning discussions rather than coding."
+                &ldquo;I suggest that the top planners spend most of their time engaged in analysis and planning discussions rather than coding.&rdquo;
               </p>
               <div className="flex items-center gap-4">
                 <div className="w-10 h-10 rounded-full bg-accent-gradient flex items-center justify-center text-white font-bold">

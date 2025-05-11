@@ -64,7 +64,7 @@ export default function SignInPage() {
 
       // Redirect to dashboard on successful sign in
       router.push('/dashboard');
-    } catch (error) {
+    } catch {
       toast.error("Something went wrong", {
         description: 'An error occurred during sign in.'
       });
@@ -78,7 +78,7 @@ export default function SignInPage() {
     try {
       await signInWithGoogle();
       // No need to redirect, as it will be handled by the OAuth callback
-    } catch (error) {
+    } catch {
       toast.error("Google sign in failed", {
         description: 'Please try again or use email sign in.'
       });
@@ -178,7 +178,7 @@ export default function SignInPage() {
         
         <div className="text-center text-sm">
           <p>
-            Don't have an account?{' '}
+            Don&apos;t have an account?{' '}
             <Link href="/sign-up" className="text-primary hover:underline">
               Sign up
             </Link>
