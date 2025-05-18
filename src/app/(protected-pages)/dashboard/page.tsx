@@ -4,7 +4,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { PredictionCard } from "./_components/prediction-card";
 // import { GoldChart } from "./_components/gold-chart";
-import { NewsSummaries } from "./_components/news-summaries";
+// import { NewsSummaries } from "./_components/news-summaries";
 // import { PredictionHistory } from "./_components/prediction-history";
 import TradingViewWidget from "./_components/Tradingview";
 
@@ -25,7 +25,7 @@ export default function DashboardPage() {
         <TabsContent value="overview" className="space-y-6">
           <div className="grid gap-4 md:grid-cols-1 lg:grid-cols-1">
             {/* Prediction Card */}
-            <PredictionCard />
+            <PredictionCard/>
             
             {/* Gold Chart */}
             <Card>
@@ -42,7 +42,7 @@ export default function DashboardPage() {
           </div>
 
           <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-2 mt-4">
-            {/* News Summaries */}
+            {/* News Summaries
             <Card className="col-span-1">
               <CardHeader>
                 <CardTitle>Market News</CardTitle>
@@ -51,7 +51,7 @@ export default function DashboardPage() {
               <CardContent>
                 <NewsSummaries />
               </CardContent>
-            </Card>
+            </Card> */}
             
             {/* Prediction History */}
             {/* <Card className="col-span-1">

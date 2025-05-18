@@ -4,7 +4,7 @@ import { useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { useAuth } from '@/providers/auth-provider';
 import { SiteHeader } from './_components/site-header';
-// import { Sidebar } from './_components/sidebar';
+import { Sidebar } from './_components/sidebar';
 
 export default function ProtectedLayout({
   children,
@@ -36,12 +36,12 @@ export default function ProtectedLayout({
   return (
     <div className="flex h-screen flex-col">
       <SiteHeader />
-      {/* <div className="flex flex-1 overflow-hidden">
-        <Sidebar /> */}
+      <div className="flex flex-1 overflow-hidden">
+        <Sidebar />
         <main className="flex-1 overflow-y-auto p-6">
           {children}
         </main>
-      {/* </div> */}
+      </div>
     </div>
   );
 } 

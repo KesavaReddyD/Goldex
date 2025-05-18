@@ -49,6 +49,7 @@ model User {
   preferences   UserPreference?
   subscription  Subscription?
   alerts        Alert[]
+  predictions   Prediction[]
   recommendations Recommendation[] @relation("UserRecommendations")
   
   // Future relations for saved recommendations, etc.
@@ -113,6 +114,49 @@ model Subscription {
   user            User      @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@map("subscriptions")
+}
+
+// Predictions for gold prices
+model Prediction {
+  id              String    @id @default(uuid())
+  createdAt       DateTime  @default(now()) @map("created_at")
+  updatedAt       DateTime  @updatedAt @map("updated_at")
+  timestamp       DateTime
+  
+  // Overall sentiment data
+  sentimentScore  Float
+  sentimentLabel  String
+  
+  // Summary prediction
+  pricePrediction String    @db.Text
+  
+  // Short term prediction
+  shortTermTimeframe String  @map("short_term_timeframe")
+  shortTermTrend    String   @map("short_term_trend")
+  shortTermOpen     Float    @map("short_term_open")
+  shortTermClose    Float    @map("short_term_close")
+  shortTermHigh     Float    @map("short_term_high")
+  shortTermLow      Float    @map("short_term_low")
+  shortTermSentimentScore   Float    @map("short_term_sentiment_score")
+  shortTermSentimentCategory String   @map("short_term_sentiment_category")
+  shortTermSentimentReasons String    @map("short_term_sentiment_reasons")
+  
+  // Long term prediction
+  longTermTimeframe String   @map("long_term_timeframe")
+  longTermTrend    String    @map("long_term_trend")
+  longTermOpen     Float     @map("long_term_open")
+  longTermClose    Float     @map("long_term_close")
+  longTermHigh     Float     @map("long_term_high")
+  longTermLow      Float     @map("long_term_low")
+  longTermSentimentScore   Float     @map("long_term_sentiment_score")
+  longTermSentimentCategory String    @map("long_term_sentiment_category")
+  longTermSentimentReasons String     @map("long_term_sentiment_reasons")
+  
+  // Relation to user who generated/viewed this prediction
+  userId          String    @map("user_id")
+  user            User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("predictions")
 }
 
 // Trading recommendations

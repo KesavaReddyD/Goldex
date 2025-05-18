@@ -5,15 +5,11 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { cn } from '@/lib/utils';
 import {
-  BarChart,
-  Bell,
   ChevronRight,
-  CreditCard,
   Home,
   Settings,
-  LineChart,
-  History,
   Menu,
+  Search,
   X,
 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
@@ -38,34 +34,40 @@ export function Sidebar() {
       icon: <Home className="h-5 w-5" />,
       variant: pathname === '/dashboard' ? 'default' : 'ghost',
     },
+    // {
+    //   title: 'Charts',
+    //   href: '/charts',
+    //   icon: <LineChart className="h-5 w-5" />,
+    //   variant: pathname === '/charts' ? 'default' : 'ghost',
+    // },
+    // {
+    //   title: 'Alerts',
+    //   href: '/alerts',
+    //   icon: <Bell className="h-5 w-5" />,
+    //   variant: pathname === '/alerts' ? 'default' : 'ghost',
+    // },
+    // {
+    //   title: 'History',
+    //   href: '/history',
+    //   icon: <History className="h-5 w-5" />,
+    //   variant: pathname === '/history' ? 'default' : 'ghost',
+    // },
+    // {
+    //   title: 'Performance',
+    //   href: '/performance',
+    //   icon: <BarChart className="h-5 w-5" />,
+    //   variant: pathname === '/performance' ? 'default' : 'ghost',
+    // },
+    // {
+    //   title: 'Subscription',
+    //   href: '/subscription',
+    //   icon: <CreditCard className="h-5 w-5" />,
+    //   variant: pathname === '/subscription' ? 'default' : 'ghost',
+    // },
     {
-      title: 'Charts',
-      href: '/charts',
-      icon: <LineChart className="h-5 w-5" />,
-      variant: pathname === '/charts' ? 'default' : 'ghost',
-    },
-    {
-      title: 'Alerts',
-      href: '/alerts',
-      icon: <Bell className="h-5 w-5" />,
-      variant: pathname === '/alerts' ? 'default' : 'ghost',
-    },
-    {
-      title: 'History',
-      href: '/history',
-      icon: <History className="h-5 w-5" />,
-      variant: pathname === '/history' ? 'default' : 'ghost',
-    },
-    {
-      title: 'Performance',
-      href: '/performance',
-      icon: <BarChart className="h-5 w-5" />,
-      variant: pathname === '/performance' ? 'default' : 'ghost',
-    },
-    {
-      title: 'Subscription',
-      href: '/subscription',
-      icon: <CreditCard className="h-5 w-5" />,
+      title: 'Explore',
+      href: '/explore',
+      icon: <Search className="h-5 w-5" />,
       variant: pathname === '/subscription' ? 'default' : 'ghost',
     },
     {
