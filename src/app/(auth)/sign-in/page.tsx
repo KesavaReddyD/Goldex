@@ -1,8 +1,8 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, Suspense } from 'react';
 import Link from 'next/link';
-import { useRouter, useSearchParams } from 'next/navigation';
+import { useRouter } from 'next/navigation';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
 import * as z from 'zod';
@@ -19,6 +19,22 @@ import {
 } from '@/components/ui/form';
 import { Separator } from '@/components/ui/separator';
 import { useAuth } from '@/providers/auth-provider';
+import { useSearchParams } from 'next/navigation';
+
+// Create a separate client component for handling search params
+const ErrorHandler = () => {
+  const searchParams = useSearchParams();
+  
+  // Check for error parameter in URL
+  const error = searchParams.get('error');
+  if (error) {
+    toast.error("Authentication Error", {
+      description: 'There was a problem signing you in.'
+    });
+  }
+  
+  return null;
+};
 
 const formSchema = z.object({
   email: z.string().email('Invalid email address'),
@@ -30,16 +46,7 @@ type FormData = z.infer<typeof formSchema>;
 export default function SignInPage() {
   const { signIn, signInWithGoogle } = useAuth();
   const router = useRouter();
-  const searchParams = useSearchParams();
   const [isLoading, setIsLoading] = useState(false);
-
-  // Check for error parameter in URL
-  const error = searchParams.get('error');
-  if (error) {
-    toast.error("Authentication Error", {
-      description: 'There was a problem signing you in.'
-    });
-  }
 
   const form = useForm<FormData>({
     resolver: zodResolver(formSchema),
@@ -88,6 +95,11 @@ export default function SignInPage() {
 
   return (
     <div className="flex min-h-screen flex-col items-center justify-center p-4">
+      {/* Add Suspense boundary around component that uses useSearchParams */}
+      <Suspense fallback={null}>
+        <ErrorHandler />
+      </Suspense>
+      
       <div className="w-full max-w-md space-y-6 rounded-lg border bg-card p-6 shadow-lg">
         <div className="space-y-2 text-center">
           <h1 className="text-3xl font-bold">Sign In</h1>

@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, Suspense } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -19,6 +19,17 @@ import {
 } from '@/components/ui/form';
 import { Separator } from '@/components/ui/separator';
 import { useAuth } from '@/providers/auth-provider';
+import { useSearchParams } from 'next/navigation';
+
+// Create a separate client component for handling search params
+const ParamsHandler = () => {
+  const searchParams = useSearchParams();
+  
+  // Currently not using any params, but keeping this for consistency with sign-in
+  // and future-proofing in case we need to add URL param handling
+  
+  return null;
+};
 
 const formSchema = z.object({
   email: z.string().email('Invalid email address'),
@@ -94,6 +105,11 @@ export default function SignUpPage() {
 
   return (
     <div className="flex min-h-screen flex-col items-center justify-center p-4">
+      {/* Add Suspense boundary for consistency with sign-in page */}
+      <Suspense fallback={null}>
+        <ParamsHandler />
+      </Suspense>
+      
       <div className="w-full max-w-md space-y-6 rounded-lg border bg-card p-6 shadow-lg">
         <div className="space-y-2 text-center">
           <h1 className="text-3xl font-bold">Create an Account</h1>
