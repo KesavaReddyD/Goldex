@@ -19,17 +19,17 @@ import {
 } from '@/components/ui/form';
 import { Separator } from '@/components/ui/separator';
 import { useAuth } from '@/providers/auth-provider';
-import { useSearchParams } from 'next/navigation';
+// import { useSearchParams } from 'next/navigation';
 
 // Create a separate client component for handling search params
-const ParamsHandler = () => {
-  const searchParams = useSearchParams();
+// const ParamsHandler = () => {
+//   const searchParams = useSearchParams();
   
-  // Currently not using any params, but keeping this for consistency with sign-in
-  // and future-proofing in case we need to add URL param handling
+//   // Currently not using any params, but keeping this for consistency with sign-in
+//   // and future-proofing in case we need to add URL param handling
   
-  return null;
-};
+//   return null;
+// };
 
 const formSchema = z.object({
   email: z.string().email('Invalid email address'),
@@ -107,7 +107,7 @@ export default function SignUpPage() {
     <div className="flex min-h-screen flex-col items-center justify-center p-4">
       {/* Add Suspense boundary for consistency with sign-in page */}
       <Suspense fallback={null}>
-        <ParamsHandler />
+        {/* <ParamsHandler /> */}
       </Suspense>
       
       <div className="w-full max-w-md space-y-6 rounded-lg border bg-card p-6 shadow-lg">
