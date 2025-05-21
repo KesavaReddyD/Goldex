@@ -20,7 +20,20 @@ export default async function ExplorePage() {
   });
 
   // Convert timestamp to string for client compatibility
-  const safePredictions = predictions.map(p => ({ ...p, timestamp: p.timestamp.toISOString() }));
+  const safePredictions = predictions.map(
+    (p: {
+      id: string;
+      userEmail: string;
+      timestamp: Date;
+      sentimentLabel: string;
+      sentimentScore: number;
+      pricePrediction: string;
+      shortTermTrend: string;
+      longTermTrend: string;
+      shortTermTimeframe: string;
+      longTermTimeframe: string;
+    }) => ({ ...p, timestamp: p.timestamp.toISOString() })
+  );
 
   return <ExplorePredictionsClient predictions={safePredictions} />;
 }
