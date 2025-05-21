@@ -49,7 +49,6 @@ model User {
   preferences   UserPreference?
   subscription  Subscription?
   alerts        Alert[]
-  predictions   Prediction[]
   recommendations Recommendation[] @relation("UserRecommendations")
   
   // Future relations for saved recommendations, etc.
@@ -152,9 +151,9 @@ model Prediction {
   longTermSentimentCategory String    @map("long_term_sentiment_category")
   longTermSentimentReasons String     @map("long_term_sentiment_reasons")
   
-  // Relation to user who generated/viewed this prediction
+  // User id (no foreign key constraint)
   userId          String    @map("user_id")
-  user            User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userEmail       String    @map("user_email")
 
   @@map("predictions")
 }

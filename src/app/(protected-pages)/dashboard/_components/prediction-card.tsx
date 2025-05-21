@@ -3,38 +3,15 @@
 import { useState } from "react";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle, CardFooter } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { Skeleton } from "@/components/ui/skeleton";
-import { ArrowDown, ArrowUp, Clock } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { toast } from "sonner";
-
-interface SentimentData {
-  score: number;
-  category: string;
-  reasons: string;
-}
-
-interface PredictionTimeframe {
-  timeframe: string;
-  trend: string;
-  open: number;
-  close: number;
-  high: number;
-  low: number;
-  sentiment: SentimentData;
-}
-
-interface PredictionData {
-  shortTerm: PredictionTimeframe;
-  longTerm: PredictionTimeframe;
-  pricePrediction: string;
-  sentimentScore: number;
-  sentimentLabel: string;
-  timestamp: string;
-}
+import { useAuth } from '@/providers/auth-provider';
+import { usePrediction } from '@/providers/prediction-provider';
+import { ArrowDown, ArrowUp, Clock } from "lucide-react";
 
 export function PredictionCard() {
-  const [prediction, setPrediction] = useState<PredictionData | null>(null);
+  const { user, session } = useAuth();
+  const { prediction, setPrediction } = usePrediction();
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
@@ -48,8 +25,7 @@ export function PredictionCard() {
         headers: {
           "Content-Type": "application/json",
         },
-        // You can add a body here if needed by the API
-        body: JSON.stringify({}),
+        body: JSON.stringify({ email: user?.email || null }),
       });
       
       if (!response.ok) {
@@ -60,18 +36,24 @@ export function PredictionCard() {
       console.log(data);
       setPrediction(data);
       
-      // Save prediction to the database using server action
-      // try {
-      //   const saveResult = await savePredictionAction(data);
-      //   if (!saveResult.success) {
-      //     console.error("Error saving prediction:", saveResult.error);
-      //     // Don't show this error to the user as the prediction was successfully fetched
-      //   } else {
-      //     console.log("Prediction saved to database");
-      //   }
-      // } catch (saveError) {
-      //   console.error("Error saving prediction:", saveError);
-      // }
+      // Store prediction in the database after receiving from n8n
+      try {
+        const accessToken = session?.access_token;
+        const saveRes = await fetch('/api/prediction', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            ...(accessToken && { Authorization: `Bearer ${accessToken}` }),
+          },
+          body: JSON.stringify(data),
+        });
+        if (!saveRes.ok) {
+          const err = await saveRes.json();
+          toast.error('Failed to save prediction', { description: err.error || 'Could not store prediction in database.' });
+        }
+      } catch {
+        toast.error('Failed to save prediction', { description: 'Could not store prediction in database.' });
+      }
     } catch (err) {
       console.error("Error fetching prediction:", err);
       setError(err instanceof Error ? err.message : "Failed to load prediction data");
@@ -122,15 +104,16 @@ export function PredictionCard() {
 
   if (loading) {
     return (
-      <Card className="w-full">
-        <CardHeader>
-          <CardTitle><Skeleton className="h-8 w-3/4" /></CardTitle>
-          <CardDescription><Skeleton className="h-4 w-1/2" /></CardDescription>
-        </CardHeader>
-        <CardContent className="space-y-4">
-          <Skeleton className="h-32 w-full" />
-          <Skeleton className="h-32 w-full" />
-        </CardContent>
+      <Card className="w-full flex flex-col items-center justify-center py-16">
+        <div className="flex flex-col items-center gap-4">
+          {/* Gold-themed spinner */}
+          <div className="w-10 h-10 border-4 border-yellow-400 border-t-transparent rounded-full animate-spin mb-2" />
+          {/* Blinking text */}
+          <span className="text-lg font-semibold text-yellow-600 animate-pulse">
+            Predicting the Future...
+          </span>
+          <span className="text-xs text-gray-400 mt-2">AI is analyzing gold market trends</span>
+        </div>
       </Card>
     );
   }

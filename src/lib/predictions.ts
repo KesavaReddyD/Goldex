@@ -25,7 +25,7 @@ export interface PredictionData {
   timestamp: string;
 }
 
-export async function savePrediction(predictionData: PredictionData, userId: string) {
+export async function savePrediction(predictionData: PredictionData, userId: string, userEmail: string) {
   try {
     const prediction = await prisma.prediction.create({
       data: {
@@ -57,7 +57,8 @@ export async function savePrediction(predictionData: PredictionData, userId: str
         longTermSentimentReasons: predictionData.longTerm.sentiment.reasons,
         
         // User relation
-        userId: userId
+        userId: userId,
+        userEmail: userEmail,
       }
     });
     

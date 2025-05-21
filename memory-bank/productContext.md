@@ -118,4 +118,11 @@ Goldex will evolve from a recommendation engine to a comprehensive trading assis
 4. Social trading elements
 5. Potential integration with brokerages for one-click trading
 
-The ultimate goal is to become the essential daily tool for serious traders, providing not just recommendations but a complete trading intelligence ecosystem. 
+The ultimate goal is to become the essential daily tool for serious traders, providing not just recommendations but a complete trading intelligence ecosystem.
+
+## First Version Dashboard Release (MVP)
+- The first version of the Goldex dashboard is now live, delivering on the core user experience goals:
+  - **Overview Tab:** Shows prediction card and real-time gold price chart.
+  - **History Tab:** Users can view their own prediction history, retrieved directly from Supabase, providing transparency and a sense of progress.
+  - **Alerts Tab:** Placeholder for future alerting features.
+- This release establishes the foundation for future analytics, performance tracking, and personalized insights, ensuring users have immediate value and a clear path for upcoming enhancements. 

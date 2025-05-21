@@ -1,134 +1,117 @@
-'use client';
+"use client";
+import { useEffect, useState } from "react";
+import PredictionDetailModal from "./prediction-detail-modal";
+import { Badge } from "@/components/ui/badge";
 
-import { Progress } from "@/components/ui/progress";
-import { CheckCircle2, XCircle, AlertCircle } from "lucide-react";
-import { cn } from "@/lib/utils";
+interface Prediction {
+  id: string;
+  timestamp: string;
+  pricePrediction: string;
+  sentimentLabel: string;
+  sentimentScore: number;
+  // Flat fields for short term
+  shortTermTimeframe: string;
+  shortTermTrend: string;
+  shortTermOpen: number;
+  shortTermClose: number;
+  shortTermHigh: number;
+  shortTermLow: number;
+  shortTermSentimentScore: number;
+  shortTermSentimentCategory: string;
+  shortTermSentimentReasons: string;
+  // Flat fields for long term
+  longTermTimeframe: string;
+  longTermTrend: string;
+  longTermOpen: number;
+  longTermClose: number;
+  longTermHigh: number;
+  longTermLow: number;
+  longTermSentimentScore: number;
+  longTermSentimentCategory: string;
+  longTermSentimentReasons: string;
+}
 
-// Mock data for MVP
-const predictionStats = {
-  total: 28,
-  correct: 22,
-  incorrect: 4,
-  neutral: 2,
-  accuracy: 78.57
-};
-
-const recentPredictions = [
-  {
-    id: "1",
-    date: "May 14",
-    prediction: "up",
-    result: "up",
-    asset: "Gold",
-    status: "correct"
-  },
-  {
-    id: "2",
-    date: "May 13",
-    prediction: "down",
-    result: "down",
-    asset: "Gold",
-    status: "correct"
-  },
-  {
-    id: "3",
-    date: "May 12",
-    prediction: "up",
-    result: "flat",
-    asset: "Gold",
-    status: "neutral"
-  },
-  {
-    id: "4",
-    date: "May 11",
-    prediction: "up",
-    result: "down",
-    asset: "Gold",
-    status: "incorrect"
-  },
-  {
-    id: "5",
-    date: "May 10",
-    prediction: "up",
-    result: "up",
-    asset: "Gold",
-    status: "correct"
+function getSentimentColor(category: string) {
+  switch (category?.toLowerCase()) {
+    case "positive": return "bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-100";
+    case "negative": return "bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-100";
+    case "neutral": return "bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-100";
+    default: return "bg-gray-100 text-gray-800 dark:bg-gray-800 dark:text-gray-200";
   }
-];
+}
 
-export function PredictionHistory() {
-  const { correct, incorrect, neutral, accuracy } = predictionStats;
-  
+export default function PredictionHistory() {
+  const [predictions, setPredictions] = useState<Prediction[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+  const [selected, setSelected] = useState<Prediction | null>(null);
+  const [modalOpen, setModalOpen] = useState(false);
+
+  useEffect(() => {
+    async function fetchPredictions() {
+      setLoading(true);
+      setError(null);
+      try {
+        const res = await fetch("/api/prediction/getByUserId", {
+          method: "GET",
+        });
+        if (!res.ok) throw new Error("Failed to fetch predictions");
+        const data = await res.json();
+        setPredictions(data.predictions || []);
+      } catch (err: unknown) {
+        let message = "Unknown error";
+        if (err instanceof Error) {
+          message = err.message;
+        }
+        setError(message);
+      } finally {
+        setLoading(false);
+      }
+    }
+    fetchPredictions();
+  }, []);
+
+  if (loading) return <div>Loading prediction history...</div>;
+  if (error) return <div className="text-red-500">{error}</div>;
+  if (!predictions.length) return <div>No predictions found.</div>;
+
   return (
-    <div className="space-y-4">
-      <div className="mb-6">
-        <div className="flex justify-between items-center mb-2">
-          <span className="text-sm font-medium">Accuracy Rate</span>
-          <span className="font-bold">{accuracy.toFixed(1)}%</span>
-        </div>
-        <Progress value={accuracy} className="h-2" />
-        
-        <div className="grid grid-cols-3 gap-2 mt-4">
-          <div className="rounded-lg border p-2 text-center">
-            <div className="text-emerald-500 dark:text-emerald-400 font-medium">{correct}</div>
-            <div className="text-xs text-muted-foreground">Correct</div>
-          </div>
-          <div className="rounded-lg border p-2 text-center">
-            <div className="text-rose-500 dark:text-rose-400 font-medium">{incorrect}</div>
-            <div className="text-xs text-muted-foreground">Incorrect</div>
-          </div>
-          <div className="rounded-lg border p-2 text-center">
-            <div className="text-amber-500 dark:text-amber-400 font-medium">{neutral}</div>
-            <div className="text-xs text-muted-foreground">Neutral</div>
-          </div>
-        </div>
-      </div>
-      
-      <div>
-        <h4 className="font-medium text-sm mb-2">Recent Predictions</h4>
-        <div className="space-y-2">
-          {recentPredictions.map((pred) => (
-            <div key={pred.id} className="flex items-center justify-between p-2 border rounded-md">
-              <div className="flex items-center">
-                {pred.status === "correct" && (
-                  <CheckCircle2 className="h-4 w-4 text-emerald-500 dark:text-emerald-400 mr-2" />
-                )}
-                {pred.status === "incorrect" && (
-                  <XCircle className="h-4 w-4 text-rose-500 dark:text-rose-400 mr-2" />
-                )}
-                {pred.status === "neutral" && (
-                  <AlertCircle className="h-4 w-4 text-amber-500 dark:text-amber-400 mr-2" />
-                )}
-                <span className="text-sm">{pred.date}</span>
-              </div>
-              
-              <div className="flex items-center">
-                <div className="text-xs px-2 py-1 rounded">
-                  Predicted: 
-                  <span className={cn(
-                    "ml-1 font-medium",
-                    pred.prediction === "up" ? "text-emerald-500 dark:text-emerald-400" : "text-rose-500 dark:text-rose-400"
-                  )}>
-                    {pred.prediction.toUpperCase()}
-                  </span>
-                </div>
-                
-                <div className="text-xs px-2 py-1 rounded">
-                  Result:
-                  <span className={cn(
-                    "ml-1 font-medium",
-                    pred.result === "up" ? "text-emerald-500 dark:text-emerald-400" : 
-                    pred.result === "down" ? "text-rose-500 dark:text-rose-400" : 
-                    "text-amber-500 dark:text-amber-400"
-                  )}>
-                    {pred.result.toUpperCase()}
-                  </span>
-                </div>
-              </div>
-            </div>
+    <div className="overflow-x-auto">
+      <table className="min-w-full text-sm border rounded-lg overflow-hidden">
+        <thead>
+          <tr className="bg-slate-100 dark:bg-slate-800">
+            <th className="px-3 py-2 text-left">Date</th>
+            <th className="px-3 py-2 text-left">Prediction</th>
+            <th className="px-3 py-2 text-left">Short Term Trend</th>
+            <th className="px-3 py-2 text-left">Long Term Trend</th>
+            <th className="px-3 py-2 text-left">Sentiment</th>
+            <th className="px-3 py-2 text-left">Score</th>
+          </tr>
+        </thead>
+        <tbody>
+          {predictions.map((p, i) => (
+            <tr
+              key={p.id}
+              className={`transition cursor-pointer ${i % 2 === 0 ? "bg-white dark:bg-slate-900" : "bg-slate-50 dark:bg-slate-800"} hover:bg-yellow-50 dark:hover:bg-yellow-900`}
+              onClick={() => { setSelected(p); setModalOpen(true); }}
+            >
+              <td className="px-3 py-2">{new Date(p.timestamp).toLocaleString()}</td>
+              <td className="px-3 py-2 truncate max-w-xs">{p.pricePrediction}</td>
+              <td className="px-3 py-2">{p.shortTermTrend}</td>
+              <td className="px-3 py-2">{p.longTermTrend}</td>
+              <td className="px-3 py-2">
+                <Badge className={getSentimentColor(p.sentimentLabel)}>{p.sentimentLabel}</Badge>
+              </td>
+              <td className="px-3 py-2">{p.sentimentScore}</td>
+            </tr>
           ))}
-        </div>
-      </div>
+        </tbody>
+      </table>
+      <PredictionDetailModal
+        open={modalOpen}
+        onClose={() => setModalOpen(false)}
+        prediction={selected}
+      />
     </div>
   );
 } 

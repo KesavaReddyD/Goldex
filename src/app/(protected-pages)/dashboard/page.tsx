@@ -5,8 +5,8 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { PredictionCard } from "./_components/prediction-card";
 // import { GoldChart } from "./_components/gold-chart";
 // import { NewsSummaries } from "./_components/news-summaries";
-// import { PredictionHistory } from "./_components/prediction-history";
 import TradingViewWidget from "./_components/Tradingview";
+import PredictionHistory from "./_components/prediction-history";
 
 export default function DashboardPage() {
   return (
@@ -75,7 +75,7 @@ export default function DashboardPage() {
               <CardDescription>Your past trading insights</CardDescription>
             </CardHeader>
             <CardContent>
-              <p>Coming soon in the next phase.</p>
+              <PredictionHistory />
             </CardContent>
           </Card>
         </TabsContent>
